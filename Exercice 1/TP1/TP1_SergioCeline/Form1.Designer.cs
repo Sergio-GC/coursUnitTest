@@ -32,7 +32,7 @@
             cmbFilter = new ComboBox();
             cmbAlgoEdge = new ComboBox();
             btnLoadPicture = new Button();
-            btnTrasform = new Button();
+            btnTransform = new Button();
             btnSavePicture = new Button();
             pbResult = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pbInit).BeginInit();
@@ -73,15 +73,15 @@
             btnLoadPicture.UseVisualStyleBackColor = true;
             btnLoadPicture.Click += btnLoadPicture_Click;
             // 
-            // btnTrasform
+            // btnTransform
             // 
-            btnTrasform.Location = new Point(451, 219);
-            btnTrasform.Name = "btnTrasform";
-            btnTrasform.Size = new Size(185, 48);
-            btnTrasform.TabIndex = 4;
-            btnTrasform.Text = "Process";
-            btnTrasform.UseVisualStyleBackColor = true;
-            btnTrasform.Click += btnTrasform_Click;
+            btnTransform.Location = new Point(451, 219);
+            btnTransform.Name = "btnTransform";
+            btnTransform.Size = new Size(185, 48);
+            btnTransform.TabIndex = 4;
+            btnTransform.Text = "Process";
+            btnTransform.UseVisualStyleBackColor = true;
+            btnTransform.Click += btnTransform_Click;
             // 
             // btnSavePicture
             // 
@@ -108,7 +108,7 @@
             ClientSize = new Size(1115, 455);
             Controls.Add(pbResult);
             Controls.Add(btnSavePicture);
-            Controls.Add(btnTrasform);
+            Controls.Add(btnTransform);
             Controls.Add(btnLoadPicture);
             Controls.Add(cmbAlgoEdge);
             Controls.Add(cmbFilter);
@@ -126,7 +126,7 @@
         private ComboBox cmbFilter;
         private ComboBox cmbAlgoEdge;
         private Button btnLoadPicture;
-        private Button btnTrasform;
+        private Button btnTransform;
         private Button btnSavePicture;
         private PictureBox pbResult;
     }

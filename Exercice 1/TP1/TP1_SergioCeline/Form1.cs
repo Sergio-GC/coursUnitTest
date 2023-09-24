@@ -1,13 +1,30 @@
 using System.Drawing;
 using System.Drawing.Imaging;
+using TP1_SergioCeline.AlgoEdges;
 
 namespace TP1_SergioCeline
 {
     public partial class Form1 : Form
     {
+        AlgoEdge[] algoEdge = { new Laplacian() }; // , "Sobel 3x3"
+        String[] filters = { "Rainbow", "BlackWhite" };
         public Form1()
         {
             InitializeComponent();
+            InitCmbAlgoEdge();
+            InitCmbFilter();
+        }
+
+        private void InitCmbFilter()
+        {
+            cmbFilter.Items.AddRange(filters);
+            cmbFilter.SelectedIndex = 0;
+        }
+
+        private void InitCmbAlgoEdge()
+        {
+            cmbAlgoEdge.Items.AddRange(algoEdge);
+            cmbAlgoEdge.SelectedIndex = 0;
         }
 
         private void btnLoadPicture_Click(object sender, EventArgs e)
@@ -19,29 +36,22 @@ namespace TP1_SergioCeline
             if (OpenFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 StreamReader streamReader = new StreamReader(OpenFileDialog.FileName);
-                Bitmap image = new Bitmap(streamReader.BaseStream);
+                Bitmap imageInit = new Bitmap(streamReader.BaseStream);
                 streamReader.Close();
 
-                pbInit.Image = image;
+                pbInit.Image = imageInit;
 
             }
         }
 
-        private void btnTrasform_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnSavePicture_Click(object sender, EventArgs e)
         {
-           Bitmap image = (Bitmap) pbResult.Image;
-
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Title = "Specify a file name and file path";
             sfd.Filter = "Png Images(*.png)|*.png|Jpeg Images(*.jpg)|*.jpg";
             sfd.Filter += "|Bitmap Images(*.bmp)|*.bmp";
 
-            if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (sfd.ShowDialog() == DialogResult.OK)
             {
                 string fileExtension = Path.GetExtension(sfd.FileName).ToUpper();
                 ImageFormat imgFormat = ImageFormat.Png;
@@ -54,12 +64,18 @@ namespace TP1_SergioCeline
                 {
                     imgFormat = ImageFormat.Jpeg;
                 }
-
-                StreamWriter streamWriter = new StreamWriter(sfd.FileName, false);
-                image.Save(streamWriter.BaseStream, imgFormat);
-                streamWriter.Flush();
-                streamWriter.Close();
+                pbResult.Image.Save(sfd.FileName, imgFormat);
 
             }
         }
+
+        private void btnTransform_Click(object sender, EventArgs e)
+        {
+            // application du filtre
+
+            // application du Edge
+            Bitmap result = ((AlgoEdge)cmbAlgoEdge.SelectedItem).algo();
+
+        }
+    }
 }
