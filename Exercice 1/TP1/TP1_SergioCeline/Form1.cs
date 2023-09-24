@@ -8,7 +8,7 @@ namespace TP1_SergioCeline
     public partial class Form1 : Form
     {
         AlgoEdge[] algoEdge = { new Laplacian() }; // , "Sobel 3x3"
-        string[] filters = { new Rainbow().ToString() }; // BlackWhite
+        AlgoFilter[] filters = { new Rainbow() }; // BlackWhite
         public Form1()
         {
             InitializeComponent();
@@ -73,9 +73,10 @@ namespace TP1_SergioCeline
         private void btnTransform_Click(object sender, EventArgs e)
         {
             // application du filtre
+            pbResult.Image = ((AlgoFilter)cmbFilter.SelectedItem).algo(new Bitmap(pbInit.Image));
 
             // application du Edge
-            Bitmap result = ((AlgoEdge)cmbAlgoEdge.SelectedItem).algo();
+            //Bitmap result = ((AlgoEdge)cmbAlgoEdge.SelectedItem).algo();
 
         }
     }
