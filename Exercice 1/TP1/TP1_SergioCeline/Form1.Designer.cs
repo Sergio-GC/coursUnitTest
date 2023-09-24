@@ -46,6 +46,7 @@
             pbInit.Size = new Size(420, 426);
             pbInit.TabIndex = 0;
             pbInit.TabStop = false;
+            pbInit.SizeMode = PictureBoxSizeMode.StretchImage;
             // 
             // cmbFilter
             // 
@@ -100,6 +101,7 @@
             pbResult.Size = new Size(420, 426);
             pbResult.TabIndex = 6;
             pbResult.TabStop = false;
+            pbResult.SizeMode = PictureBoxSizeMode.StretchImage;
             // 
             // Form1
             // 
