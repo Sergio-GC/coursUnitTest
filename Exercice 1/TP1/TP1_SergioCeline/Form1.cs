@@ -1,13 +1,14 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using TP1_SergioCeline.AlgoEdges;
+using TP1_SergioCeline.AlgoFilters;
 
 namespace TP1_SergioCeline
 {
     public partial class Form1 : Form
     {
         AlgoEdge[] algoEdge = { new Laplacian() }; // , "Sobel 3x3"
-        String[] filters = { "Rainbow", "BlackWhite" };
+        string[] filters = { new Rainbow().ToString() }; // BlackWhite
         public Form1()
         {
             InitializeComponent();
