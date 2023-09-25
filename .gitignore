@@ -8,6 +8,10 @@
 **/bin
 **/obj
 **/obj/x86/Debug
+Debug
+Release
+bin
+obj
 
 # Add .cache files
 **/.cache
