@@ -32,45 +32,24 @@ namespace TP1_SergioCeline.AlgoEdges
 
             if (grayscale == true)
             {
-                float rgb = 0;
-
-                for (int k = 0; k < pixelBuffer.Length; k += 4)
-                {
-                    rgb = pixelBuffer[k] * 0.11f;
-                    rgb += pixelBuffer[k + 1] * 0.59f;
-                    rgb += pixelBuffer[k + 2] * 0.3f;
-
-
-                    pixelBuffer[k] = (byte)rgb;
-                    pixelBuffer[k + 1] = pixelBuffer[k];
-                    pixelBuffer[k + 2] = pixelBuffer[k];
-                    pixelBuffer[k + 3] = 255;
-                }
+                pixelBuffer = CalculGrayScal(pixelBuffer);
             }
 
-            double blue = 0.0;
-            double green = 0.0;
-            double red = 0.0;
-
             int filterWidth = filterMatrix.GetLength(1);
-            int filterHeight = filterMatrix.GetLength(0);
 
             int filterOffset = (filterWidth - 1) / 2;
-            int calcOffset = 0;
-
-            int byteOffset = 0;
-
+            
             for (int offsetY = filterOffset; offsetY <
                 sourceBitmap.Height - filterOffset; offsetY++)
             {
                 for (int offsetX = filterOffset; offsetX <
                     sourceBitmap.Width - filterOffset; offsetX++)
                 {
-                    blue = 0;
-                    green = 0;
-                    red = 0;
+                    double blue = 0.0;
+                    double green = 0.0;
+                    double red = 0.0;
 
-                    byteOffset = offsetY *
+                    int byteOffset = offsetY *
                                  sourceData.Stride +
                                  offsetX * 4;
 
@@ -81,21 +60,17 @@ namespace TP1_SergioCeline.AlgoEdges
                             filterX <= filterOffset; filterX++)
                         {
 
-                            calcOffset = byteOffset +
+                            int calcOffset = byteOffset +
                                          (filterX * 4) +
                                          (filterY * sourceData.Stride);
 
-                            blue += (double)(pixelBuffer[calcOffset]) *
-                                    filterMatrix[filterY + filterOffset,
+                            double matrixValue = filterMatrix[filterY + filterOffset,
                                                         filterX + filterOffset];
+                            blue += (double)(pixelBuffer[calcOffset]) * matrixValue;
 
-                            green += (double)(pixelBuffer[calcOffset + 1]) *
-                                     filterMatrix[filterY + filterOffset,
-                                                        filterX + filterOffset];
+                            green += (double)(pixelBuffer[calcOffset + 1]) * matrixValue;
 
-                            red += (double)(pixelBuffer[calcOffset + 2]) *
-                                   filterMatrix[filterY + filterOffset,
-                                                      filterX + filterOffset];
+                            red += (double)(pixelBuffer[calcOffset + 2]) * matrixValue;
                         }
                     }
 
@@ -157,37 +132,10 @@ namespace TP1_SergioCeline.AlgoEdges
 
             if (grayscale == true)
             {
-                float rgb = 0;
-
-                for (int k = 0; k < pixelBuffer.Length; k += 4)
-                {
-                    rgb = pixelBuffer[k] * 0.11f;
-                    rgb += pixelBuffer[k + 1] * 0.59f;
-                    rgb += pixelBuffer[k + 2] * 0.3f;
-
-                    pixelBuffer[k] = (byte)rgb;
-                    pixelBuffer[k + 1] = pixelBuffer[k];
-                    pixelBuffer[k + 2] = pixelBuffer[k];
-                    pixelBuffer[k + 3] = 255;
-                }
+                pixelBuffer = CalculGrayScal(pixelBuffer);
             }
 
-            double blueX = 0.0;
-            double greenX = 0.0;
-            double redX = 0.0;
-
-            double blueY = 0.0;
-            double greenY = 0.0;
-            double redY = 0.0;
-
-            double blueTotal = 0.0;
-            double greenTotal = 0.0;
-            double redTotal = 0.0;
-
             int filterOffset = 1;
-            int calcOffset = 0;
-
-            int byteOffset = 0;
 
             for (int offsetY = filterOffset; offsetY <
                 sourceBitmap.Height - filterOffset; offsetY++)
@@ -195,12 +143,15 @@ namespace TP1_SergioCeline.AlgoEdges
                 for (int offsetX = filterOffset; offsetX <
                     sourceBitmap.Width - filterOffset; offsetX++)
                 {
-                    blueX = greenX = redX = 0;
-                    blueY = greenY = redY = 0;
+                    double blueX = 0.0;
+                    double greenX = 0.0;
+                    double redX = 0.0;
 
-                    blueTotal = greenTotal = redTotal = 0.0;
+                    double blueY = 0.0;
+                    double greenY = 0.0;
+                    double redY = 0.0;
 
-                    byteOffset = offsetY *
+                    int byteOffset = offsetY *
                                  sourceData.Stride +
                                  offsetX * 4;
 
@@ -210,39 +161,28 @@ namespace TP1_SergioCeline.AlgoEdges
                         for (int filterX = -filterOffset;
                             filterX <= filterOffset; filterX++)
                         {
-                            calcOffset = byteOffset +
+                           int calcOffset = byteOffset +
                                          (filterX * 4) +
                                          (filterY * sourceData.Stride);
 
-                            blueX += (double)(pixelBuffer[calcOffset]) *
-                                      xFilterMatrix[filterY + filterOffset,
+                            double xValue = xFilterMatrix[filterY + filterOffset,
                                               filterX + filterOffset];
 
-                            greenX += (double)(pixelBuffer[calcOffset + 1]) *
-                                      xFilterMatrix[filterY + filterOffset,
-                                              filterX + filterOffset];
+                            blueX += (double)(pixelBuffer[calcOffset]) * xValue;
+                            greenX += (double)(pixelBuffer[calcOffset + 1]) * xValue;
+                            redX += (double)(pixelBuffer[calcOffset + 2]) * xValue;
 
-                            redX += (double)(pixelBuffer[calcOffset + 2]) *
-                                      xFilterMatrix[filterY + filterOffset,
+                            double yValue = yFilterMatrix[filterY + filterOffset,
                                               filterX + filterOffset];
-
-                            blueY += (double)(pixelBuffer[calcOffset]) *
-                                      yFilterMatrix[filterY + filterOffset,
-                                              filterX + filterOffset];
-
-                            greenY += (double)(pixelBuffer[calcOffset + 1]) *
-                                      yFilterMatrix[filterY + filterOffset,
-                                              filterX + filterOffset];
-
-                            redY += (double)(pixelBuffer[calcOffset + 2]) *
-                                      yFilterMatrix[filterY + filterOffset,
-                                              filterX + filterOffset];
+                            blueY += (double)(pixelBuffer[calcOffset]) * yValue;
+                            greenY += (double)(pixelBuffer[calcOffset + 1]) * yValue;
+                            redY += (double)(pixelBuffer[calcOffset + 2]) * yValue;
                         }
                     }
 
-                    blueTotal = Math.Sqrt((blueX * blueX) + (blueY * blueY));
-                    greenTotal = Math.Sqrt((greenX * greenX) + (greenY * greenY));
-                    redTotal = Math.Sqrt((redX * redX) + (redY * redY));
+                    double blueTotal = Math.Sqrt((blueX * blueX) + (blueY * blueY));
+                    double greenTotal = Math.Sqrt((greenX * greenX) + (greenY * greenY));
+                    double redTotal = Math.Sqrt((redX * redX) + (redY * redY));
 
                     if (blueTotal > 255)
                     { blueTotal = 255; }
@@ -277,6 +217,23 @@ namespace TP1_SergioCeline.AlgoEdges
             resultBitmap.UnlockBits(resultData);
 
             return resultBitmap;
+        }
+
+        public byte[] CalculGrayScal(byte[] pixelBuffer)
+        {
+            for (int k = 0; k < pixelBuffer.Length; k += 4)
+            {
+                float rgb = pixelBuffer[k] * 0.11f;
+                rgb += pixelBuffer[k + 1] * 0.59f;
+                rgb += pixelBuffer[k + 2] * 0.3f;
+
+                pixelBuffer[k] = (byte)rgb;
+                pixelBuffer[k + 1] = pixelBuffer[k];
+                pixelBuffer[k + 2] = pixelBuffer[k];
+                pixelBuffer[k + 3] = 255;
+            }
+
+            return pixelBuffer;
         }
 
         public override bool Equals(object? obj)
