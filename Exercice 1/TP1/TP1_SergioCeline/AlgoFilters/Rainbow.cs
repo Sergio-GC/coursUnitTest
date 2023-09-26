@@ -11,10 +11,12 @@ namespace TP1_SergioCeline.AlgoFilters
         public Rainbow() : base("Rainbow") { }
         public override Bitmap algo(Bitmap image)
         {
-            Bitmap temp = new Bitmap(image.Width, image.Height);
+            Bitmap result = new Bitmap(image.Width, image.Height);
+            //TODO pourquoi pas Width?
             int raz = image.Height / 4;
             for (int x = 0; x < image.Width; x++)
             {
+                //TODO on pourrait faire une fonction pour le choix de couleur ?
                 // Dividers for the colors
                 int r = 1, g = 1, b = 1;
 
@@ -47,11 +49,11 @@ namespace TP1_SergioCeline.AlgoFilters
                     byte blue = image.GetPixel(x, y).B;
 
                     // Change the colors
-                    temp.SetPixel(x, y, Color.FromArgb(red / r, green / g, blue / b)) ;
+                    result.SetPixel(x, y, Color.FromArgb(red / r, green / g, blue / b)) ;
                 }
 
             }
-            return temp;
+            return result;
         }
     }
 }
