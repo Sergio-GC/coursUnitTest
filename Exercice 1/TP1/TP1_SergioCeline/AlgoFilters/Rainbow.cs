@@ -17,7 +17,7 @@ namespace TP1_SergioCeline.AlgoFilters
             for (int x = 0; x < image.Width; x++)
             {
                 // Dividers for the colors
-                int []dividers = GetDividers(x, raz);
+                var dividers = GetDividers(x, raz);
 
                 for (int y = 0; y < image.Height; y++)
                 {
@@ -27,7 +27,7 @@ namespace TP1_SergioCeline.AlgoFilters
                     byte blue = image.GetPixel(x, y).B;
 
                     // Change the colors
-                    result.SetPixel(x, y, Color.FromArgb(red / dividers[0], green / dividers[1], blue / dividers[2])) ;
+                    result.SetPixel(x, y, Color.FromArgb(red / dividers.red, green / dividers.green, blue / dividers.green)) ;
                 }
 
             }
@@ -39,37 +39,34 @@ namespace TP1_SergioCeline.AlgoFilters
         /// </summary>
         /// <param name="horizontalPixel">Position of the current pixel horizontally (by the width)</param>
         /// <param name="sideWidth">Width of each side to determine in which size is the pixel</param>
-        /// <returns>Array with integer dividers in rgb order</returns>
-        private int[] GetDividers(int horizontalPixel, float sideWidth)
+        /// <returns>Red, green and blue variables containing the division value</returns>
+        private (int red, int green, int blue) GetDividers(int horizontalPixel, float sideWidth)
         {
             // By default, dividers are equal to 1
-            int[] result = {1, 1, 1};
+            int red = 1, green = 1, blue = 1;
             int currentArea = (int)(horizontalPixel / sideWidth);
 
             // Calculate the dividers in function of the current position
             switch(currentArea)
             {
                 case 0:
-                    result[0] = 5;
+                    red = 5;
                     break;
                 case 1:
-                    result[1] = 5;
+                    green = 5;
                     break;
                 case 2:
-                    result[2] = 5;
+                    blue = 5;
                     break;
                 case 3:
-                    result[0] = result[2] = 5;
+                    red = blue = 5;
                     break;
                 default:
-                    result[0] = result[1] = result[2] = 5;
+                    red = green = blue = 5;
                     break;
             }
-            // SI jamais en C# tu peux aussi retourneé (red,green,blue)
-            // et ça se recupère soit en faisait des variable dans les parenthèses
-            // soit en recupérant résulte qui a 3 attribut red, green, blue
-            // JE trouverais plus sympa que une liste de int qu'on ne sait pas leur corespondence 
-            return result;
+
+            return (red, green, blue);
         }
     }
 }
