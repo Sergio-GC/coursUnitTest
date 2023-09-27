@@ -9,6 +9,7 @@ namespace TP1_SergioCeline.AlgoFilters
     public class Rainbow : AlgoFilter
     {
         public Rainbow() : base("Rainbow") { }
+
         public override Bitmap algo(Bitmap image)
         {
             Bitmap result = new Bitmap(image.Width, image.Height);
@@ -64,7 +65,10 @@ namespace TP1_SergioCeline.AlgoFilters
                     result[0] = result[1] = result[2] = 5;
                     break;
             }
-
+            // SI jamais en C# tu peux aussi retourneé (red,green,blue)
+            // et ça se recupère soit en faisait des variable dans les parenthèses
+            // soit en recupérant résulte qui a 3 attribut red, green, blue
+            // JE trouverais plus sympa que une liste de int qu'on ne sait pas leur corespondence 
             return result;
         }
     }
