@@ -8,7 +8,7 @@ namespace TP1_SergioCeline
     public partial class FormImages : Form
     {
         AlgoEdge[] algoEdge = { new Laplacian(), new Sobel() };
-        AlgoFilter[] filters = { new Rainbow(), new BlackWhite() };
+        AlgoFilter[] filters = { new Rainbow(), new BlackWhite(), new ColorSwap() };
         public FormImages()
         {
             InitializeComponent();
