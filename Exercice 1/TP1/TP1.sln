@@ -9,7 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageEdgeDetection", "..\Im
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PictureBox.Image.Testes", "..\Pixel_Manipulation\C#\PictureBox.Image.Testes\PictureBox.Image.Testes.csproj", "{58BCF607-4F49-4277-8B26-F30D6BEBAA1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TP1_SergioCeline", "TP1_SergioCeline\TP1_SergioCeline.csproj", "{CD208A94-B3D5-4ED4-80C0-76FC933B1786}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TP1_SergioCeline", "TP1_SergioCeline\TP1_SergioCeline.csproj", "{CD208A94-B3D5-4ED4-80C0-76FC933B1786}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TP1_SergioCeline.Test", "TP1_SergioCeline.Test\TP1_SergioCeline.Test.csproj", "{81366B58-F7FA-4216-BE2E-2996117DE974}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,14 @@ Global
 		{CD208A94-B3D5-4ED4-80C0-76FC933B1786}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CD208A94-B3D5-4ED4-80C0-76FC933B1786}.Release|x86.ActiveCfg = Release|Any CPU
 		{CD208A94-B3D5-4ED4-80C0-76FC933B1786}.Release|x86.Build.0 = Release|Any CPU
+		{81366B58-F7FA-4216-BE2E-2996117DE974}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81366B58-F7FA-4216-BE2E-2996117DE974}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81366B58-F7FA-4216-BE2E-2996117DE974}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{81366B58-F7FA-4216-BE2E-2996117DE974}.Debug|x86.Build.0 = Debug|Any CPU
+		{81366B58-F7FA-4216-BE2E-2996117DE974}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81366B58-F7FA-4216-BE2E-2996117DE974}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81366B58-F7FA-4216-BE2E-2996117DE974}.Release|x86.ActiveCfg = Release|Any CPU
+		{81366B58-F7FA-4216-BE2E-2996117DE974}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
