@@ -1,6 +1,6 @@
 ﻿namespace TP1_SergioCeline
 {
-    partial class Form1
+    partial class FormImages
     {
         /// <summary>
         ///  Required designer variable.
@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             pbInit = new PictureBox();
-            cmbFilter = new ComboBox();
             cmbAlgoEdge = new ComboBox();
             btnLoadPicture = new Button();
             btnTransform = new Button();
             btnSavePicture = new Button();
             pbResult = new PictureBox();
+            lbFilter = new ListBox();
             ((System.ComponentModel.ISupportInitialize)pbInit).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbResult).BeginInit();
             SuspendLayout();
@@ -44,22 +44,14 @@
             pbInit.Location = new Point(12, 12);
             pbInit.Name = "pbInit";
             pbInit.Size = new Size(420, 426);
+            pbInit.SizeMode = PictureBoxSizeMode.StretchImage;
             pbInit.TabIndex = 0;
             pbInit.TabStop = false;
-            pbInit.SizeMode = PictureBoxSizeMode.StretchImage;
-            // 
-            // cmbFilter
-            // 
-            cmbFilter.FormattingEnabled = true;
-            cmbFilter.Location = new Point(451, 82);
-            cmbFilter.Name = "cmbFilter";
-            cmbFilter.Size = new Size(185, 33);
-            cmbFilter.TabIndex = 1;
             // 
             // cmbAlgoEdge
             // 
             cmbAlgoEdge.FormattingEnabled = true;
-            cmbAlgoEdge.Location = new Point(451, 149);
+            cmbAlgoEdge.Location = new Point(451, 236);
             cmbAlgoEdge.Name = "cmbAlgoEdge";
             cmbAlgoEdge.Size = new Size(185, 33);
             cmbAlgoEdge.TabIndex = 2;
@@ -76,7 +68,7 @@
             // 
             // btnTransform
             // 
-            btnTransform.Location = new Point(451, 219);
+            btnTransform.Location = new Point(451, 287);
             btnTransform.Name = "btnTransform";
             btnTransform.Size = new Size(185, 48);
             btnTransform.TabIndex = 4;
@@ -99,23 +91,33 @@
             pbResult.Location = new Point(660, 12);
             pbResult.Name = "pbResult";
             pbResult.Size = new Size(420, 426);
+            pbResult.SizeMode = PictureBoxSizeMode.StretchImage;
             pbResult.TabIndex = 6;
             pbResult.TabStop = false;
-            pbResult.SizeMode = PictureBoxSizeMode.StretchImage;
             // 
-            // Form1
+            // lbFilter
+            // 
+            lbFilter.FormattingEnabled = true;
+            lbFilter.ItemHeight = 25;
+            lbFilter.Location = new Point(451, 84);
+            lbFilter.Name = "lbFilter";
+            lbFilter.SelectionMode = SelectionMode.MultiSimple;
+            lbFilter.Size = new Size(185, 129);
+            lbFilter.TabIndex = 7;
+            // 
+            // FormImages
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1115, 455);
+            Controls.Add(lbFilter);
             Controls.Add(pbResult);
             Controls.Add(btnSavePicture);
             Controls.Add(btnTransform);
             Controls.Add(btnLoadPicture);
             Controls.Add(cmbAlgoEdge);
-            Controls.Add(cmbFilter);
             Controls.Add(pbInit);
-            Name = "Form1";
+            Name = "FormImages";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)pbInit).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbResult).EndInit();
@@ -125,11 +127,11 @@
         #endregion
 
         private PictureBox pbInit;
-        private ComboBox cmbFilter;
         private ComboBox cmbAlgoEdge;
         private Button btnLoadPicture;
         private Button btnTransform;
         private Button btnSavePicture;
         private PictureBox pbResult;
+        private ListBox lbFilter;
     }
 }

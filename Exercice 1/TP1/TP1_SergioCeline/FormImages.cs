@@ -5,21 +5,20 @@ using TP1_SergioCeline.AlgoFilters;
 
 namespace TP1_SergioCeline
 {
-    public partial class Form1 : Form
+    public partial class FormImages : Form
     {
-        AlgoEdge[] algoEdge = { new Laplacian(), new Sobel() }; 
+        AlgoEdge[] algoEdge = { new Laplacian(), new Sobel() };
         AlgoFilter[] filters = { new Rainbow(), new BlackWhite() };
-        public Form1()
+        public FormImages()
         {
             InitializeComponent();
             InitCmbAlgoEdge();
-            InitCmbFilter();
+            InitLbFilter();
         }
 
-        private void InitCmbFilter()
+        private void InitLbFilter()
         {
-            cmbFilter.Items.AddRange(filters);
-            cmbFilter.SelectedIndex = 0;
+            lbFilter.Items.AddRange(filters);
         }
 
         private void InitCmbAlgoEdge()
@@ -74,11 +73,13 @@ namespace TP1_SergioCeline
         {
             Bitmap bitmap = new Bitmap(pbInit.Image);
             // application du filtre
-            bitmap = ((AlgoFilter)cmbFilter.SelectedItem).algo(bitmap);
-
+            foreach (var item in lbFilter.SelectedItems)
+            {
+                bitmap = ((AlgoFilter)item).algo(bitmap);
+            }
             // application du Edge
             bitmap = ((AlgoEdge)cmbAlgoEdge.SelectedItem).algo(bitmap);
-            
+
             pbResult.Image = bitmap;
         }
     }
