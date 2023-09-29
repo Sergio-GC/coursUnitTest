@@ -13,6 +13,15 @@ namespace TP1_SergioCeline.AlgoEdges
 
         public abstract Bitmap algo(Bitmap init);
 
+        /// <summary>
+        /// Use a matrix to appliy a filter in X 
+        /// </summary>
+        /// <param name="sourceBitmap"></param>
+        /// <param name="filterMatrix"></param>
+        /// <param name="factor"></param>
+        /// <param name="bias"></param>
+        /// <param name="grayscale"></param>
+        /// <returns></returns>
         public Bitmap ConvolutionFilterX(Bitmap sourceBitmap,
                                              double[,] filterMatrix,
                                                   double factor = 1,
@@ -112,6 +121,16 @@ namespace TP1_SergioCeline.AlgoEdges
 
             return resultBitmap;
         }
+        /// <summary>
+        /// Use a matrix to appliy a filter in X and Y
+        /// </summary>
+        /// <param name="sourceBitmap"></param>
+        /// <param name="xFilterMatrix"></param>
+        /// <param name="yFilterMatrix"></param>
+        /// <param name="factor"></param>
+        /// <param name="bias"></param>
+        /// <param name="grayscale"></param>
+        /// <returns></returns>
         public Bitmap ConvolutionFilterXY(Bitmap sourceBitmap,
                                                 double[,] xFilterMatrix,
                                                 double[,] yFilterMatrix,
@@ -219,6 +238,11 @@ namespace TP1_SergioCeline.AlgoEdges
             return resultBitmap;
         }
 
+        /// <summary>
+        /// calcul a gray scal in the algo
+        /// </summary>
+        /// <param name="pixelBuffer"></param>
+        /// <returns></returns>
         public byte[] CalculGrayScal(byte[] pixelBuffer)
         {
             for (int k = 0; k < pixelBuffer.Length; k += 4)
