@@ -1,3 +1,6 @@
+using System.Drawing;
+using TP1_SergioCeline.AlgoFilters;
+
 namespace TP1_SergioCeline.Test.AlgoFilters
 {
     [TestClass]
@@ -12,8 +15,8 @@ namespace TP1_SergioCeline.Test.AlgoFilters
             StreamReader initstreamReader = new StreamReader(initFileName);
             StreamReader expectedStreamReader = new StreamReader(expectedFileName);
             
-            Bitmap init = new BitMap(initstreamReader.BaseStream);
-            Bitmap expected = new BitMap(expectedStreamReader.BaseStream); 
+            Bitmap init = new Bitmap(initstreamReader.BaseStream);
+            Bitmap expected = new Bitmap(expectedStreamReader.BaseStream); 
 
             Bitmap actual =  (new BlackWhite()).algo(init);
             Assert.AreEqual(expected, actual);
