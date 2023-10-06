@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="AlgoEdges\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\TP1_SergioCeline\TP1_SergioCeline.csproj" />
   </ItemGroup>
 
