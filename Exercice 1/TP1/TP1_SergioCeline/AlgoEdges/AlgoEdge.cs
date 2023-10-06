@@ -47,7 +47,7 @@ namespace TP1_SergioCeline.AlgoEdges
             int filterWidth = filterMatrix.GetLength(1);
 
             int filterOffset = (filterWidth - 1) / 2;
-            
+
             for (int offsetY = filterOffset; offsetY <
                 sourceBitmap.Height - filterOffset; offsetY++)
             {
@@ -121,6 +121,85 @@ namespace TP1_SergioCeline.AlgoEdges
 
             return resultBitmap;
         }
+        Here are some unit tests for the ConvolutionFilterX method:
+
+1. Test that the method returns a non-null Bitmap object:
+```csharp
+[TestMethod]
+public void ConvolutionFilterX_ReturnsNonNullBitmap()
+        {
+            // Arrange
+            Bitmap sourceBitmap = new Bitmap(100, 100);
+            double[,] filterMatrix = new double[3, 3];
+
+            // Act
+            Bitmap resultBitmap = ConvolutionFilterX(sourceBitmap, filterMatrix);
+
+            // Assert
+            Assert.IsNotNull(resultBitmap);
+        }
+```
+
+2. Test that the method returns a Bitmap object with the same dimensions as the source bitmap:
+```csharp
+[TestMethod]
+public void ConvolutionFilterX_ReturnsBitmapWithSameDimensions()
+        {
+            // Arrange
+            Bitmap sourceBitmap = new Bitmap(100, 100);
+            double[,] filterMatrix = new double[3, 3];
+
+            // Act
+            Bitmap resultBitmap = ConvolutionFilterX(sourceBitmap, filterMatrix);
+
+            // Assert
+            Assert.AreEqual(sourceBitmap.Width, resultBitmap.Width);
+            Assert.AreEqual(sourceBitmap.Height, resultBitmap.Height);
+        }
+```
+
+3. Test that the method applies the filter correctly to the pixels in the source bitmap:
+```csharp
+[TestMethod]
+public void ConvolutionFilterX_AppliesFilterCorrectly()
+        {
+            // Arrange
+            Bitmap sourceBitmap = new Bitmap(100, 100);
+            double[,] filterMatrix = new double[3, 3] { { 1, 0, -1 }, { 2, 0, -2 }, { 1, 0, -1 } };
+
+            // Act
+            Bitmap resultBitmap = ConvolutionFilterX(sourceBitmap, filterMatrix);
+
+            // Assert
+            // Check that the resultBitmap contains the expected pixel values after applying the filter
+            // You can compare individual pixel values or check a specific region of the image
+        }
+```
+
+4. Test that the method handles grayscale conversion correctly:
+```csharp
+[TestMethod]
+public void ConvolutionFilterX_HandlesGrayscaleConversionCorrectly()
+        {
+            // Arrange
+            Bitmap sourceBitmap = new Bitmap(100, 100);
+            double[,] filterMatrix = new double[3, 3];
+            bool grayscale = true;
+
+            // Act
+            Bitmap resultBitmap = ConvolutionFilterX(sourceBitmap, filterMatrix, grayscale: grayscale);
+
+            // Assert
+            // Check that the resultBitmap is grayscale
+            // You can check individual pixel values or use a library like AForge.NET to perform more advanced checks
+        }
+```
+
+These are just a few examples of unit tests that you can write for the ConvolutionFilterX method.You can add more tests to cover different scenarios and edge cases.
+
+
+
+
         /// <summary>
         /// Use a matrix to appliy a filter in X and Y
         /// </summary>
@@ -180,9 +259,9 @@ namespace TP1_SergioCeline.AlgoEdges
                         for (int filterX = -filterOffset;
                             filterX <= filterOffset; filterX++)
                         {
-                           int calcOffset = byteOffset +
-                                         (filterX * 4) +
-                                         (filterY * sourceData.Stride);
+                            int calcOffset = byteOffset +
+                                          (filterX * 4) +
+                                          (filterY * sourceData.Stride);
 
                             double xValue = xFilterMatrix[filterY + filterOffset,
                                               filterX + filterOffset];
@@ -237,6 +316,98 @@ namespace TP1_SergioCeline.AlgoEdges
 
             return resultBitmap;
         }
+        Here are some unit tests for the ConvolutionFilterXY method:
+
+1. Test that the output bitmap has the same dimensions as the input bitmap:
+```csharp
+[TestMethod]
+public void ConvolutionFilterXY_OutputHasSameDimensions()
+        {
+            // Arrange
+            Bitmap inputBitmap = new Bitmap(100, 100);
+            double[,] xFilterMatrix = new double[,] { { 1, 0, -1 }, { 2, 0, -2 }, { 1, 0, -1 } };
+            double[,] yFilterMatrix = new double[,] { { 1, 2, 1 }, { 0, 0, 0 }, { -1, -2, -1 } };
+
+            // Act
+            Bitmap outputBitmap = ConvolutionFilterXY(inputBitmap, xFilterMatrix, yFilterMatrix);
+
+            // Assert
+            Assert.AreEqual(inputBitmap.Width, outputBitmap.Width);
+            Assert.AreEqual(inputBitmap.Height, outputBitmap.Height);
+        }
+```
+
+2. Test that the output bitmap is not the same instance as the input bitmap:
+```csharp
+[TestMethod]
+public void ConvolutionFilterXY_OutputIsNotSameInstance()
+        {
+            // Arrange
+            Bitmap inputBitmap = new Bitmap(100, 100);
+            double[,] xFilterMatrix = new double[,] { { 1, 0, -1 }, { 2, 0, -2 }, { 1, 0, -1 } };
+            double[,] yFilterMatrix = new double[,] { { 1, 2, 1 }, { 0, 0, 0 }, { -1, -2, -1 } };
+
+            // Act
+            Bitmap outputBitmap = ConvolutionFilterXY(inputBitmap, xFilterMatrix, yFilterMatrix);
+
+            // Assert
+            Assert.AreNotSame(inputBitmap, outputBitmap);
+        }
+```
+
+3. Test that the output bitmap is in the correct format(32bppArgb) :
+```csharp
+[TestMethod]
+public void ConvolutionFilterXY_OutputIsInCorrectFormat()
+        {
+            // Arrange
+            Bitmap inputBitmap = new Bitmap(100, 100);
+            double[,] xFilterMatrix = new double[,] { { 1, 0, -1 }, { 2, 0, -2 }, { 1, 0, -1 } };
+            double[,] yFilterMatrix = new double[,] { { 1, 2, 1 }, { 0, 0, 0 }, { -1, -2, -1 } };
+
+            // Act
+            Bitmap outputBitmap = ConvolutionFilterXY(inputBitmap, xFilterMatrix, yFilterMatrix);
+
+            // Assert
+            Assert.AreEqual(PixelFormat.Format32bppArgb, outputBitmap.PixelFormat);
+        }
+```
+
+4. Test that the output bitmap is grayscale when the grayscale parameter is set to true:
+```csharp
+[TestMethod]
+public void ConvolutionFilterXY_OutputIsGrayscale()
+        {
+            // Arrange
+            Bitmap inputBitmap = new Bitmap(100, 100);
+            double[,] xFilterMatrix = new double[,] { { 1, 0, -1 }, { 2, 0, -2 }, { 1, 0, -1 } };
+            double[,] yFilterMatrix = new double[,] { { 1, 2, 1 }, { 0, 0, 0 }, { -1, -2, -1 } };
+
+            // Act
+            Bitmap outputBitmap = ConvolutionFilterXY(inputBitmap, xFilterMatrix, yFilterMatrix, grayscale: true);
+
+            // Assert
+            Assert.IsTrue(IsGrayscale(outputBitmap));
+        }
+
+        private bool IsGrayscale(Bitmap bitmap)
+        {
+            for (int y = 0; y < bitmap.Height; y++)
+            {
+                for (int x = 0; x < bitmap.Width; x++)
+                {
+                    Color pixelColor = bitmap.GetPixel(x, y);
+                    if (pixelColor.R != pixelColor.G || pixelColor.G != pixelColor.B)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+```
+
+These tests cover the basic functionality and some edge cases of the ConvolutionFilterXY method.You can add more tests to cover other scenarios if needed.
 
         /// <summary>
         /// calcul a gray scal in the algo
@@ -259,6 +430,64 @@ namespace TP1_SergioCeline.AlgoEdges
 
             return pixelBuffer;
         }
+        Here are some unit tests for the `CalculGrayScal` method:
+
+```csharp
+[Test]
+public void CalculGrayScal_ReturnsGrayScaleImage()
+        {
+            // Arrange
+            byte[] pixelBuffer = new byte[] { 100, 150, 200, 255, 50, 100, 150, 255 };
+
+            // Act
+            byte[] result = CalculGrayScal(pixelBuffer);
+
+            // Assert
+            Assert.AreEqual(2, result.Length);
+            Assert.AreEqual(130, result[0]);
+            Assert.AreEqual(130, result[1]);
+        }
+
+        [Test]
+        public void CalculGrayScal_ReturnsGrayScaleImage_WithAlphaChannel()
+        {
+            // Arrange
+            byte[] pixelBuffer = new byte[] { 100, 150, 200, 100, 50, 100, 150, 200 };
+
+            // Act
+            byte[] result = CalculGrayScal(pixelBuffer);
+
+            // Assert
+            Assert.AreEqual(4, result.Length);
+            Assert.AreEqual(130, result[0]);
+            Assert.AreEqual(130, result[1]);
+            Assert.AreEqual(130, result[2]);
+            Assert.AreEqual(255, result[3]);
+        }
+
+        [Test]
+        public void CalculGrayScal_ReturnsGrayScaleImage_WithMultiplePixels()
+        {
+            // Arrange
+            byte[] pixelBuffer = new byte[] { 100, 150, 200, 255, 50, 100, 150, 255, 200, 50, 100, 255 };
+
+            // Act
+            byte[] result = CalculGrayScal(pixelBuffer);
+
+            // Assert
+            Assert.AreEqual(8, result.Length);
+            Assert.AreEqual(130, result[0]);
+            Assert.AreEqual(130, result[1]);
+            Assert.AreEqual(130, result[2]);
+            Assert.AreEqual(255, result[3]);
+            Assert.AreEqual(130, result[4]);
+            Assert.AreEqual(130, result[5]);
+            Assert.AreEqual(130, result[6]);
+            Assert.AreEqual(255, result[7]);
+        }
+```
+
+These tests cover the basic functionality of the `CalculGrayScal` method by verifying that it correctly converts the input pixel buffer to grayscale.The tests check the resulting pixel values and the length of the output buffer.
 
         public override bool Equals(object? obj)
         {

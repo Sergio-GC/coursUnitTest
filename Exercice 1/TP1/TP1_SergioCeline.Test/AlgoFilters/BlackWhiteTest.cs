@@ -11,14 +11,14 @@ namespace TP1_SergioCeline.Test.AlgoFilters
         {
             string initFileName = "init.png";
             string expectedFileName = "blacWhite.png";
-            
+
             StreamReader initstreamReader = new StreamReader(initFileName);
             StreamReader expectedStreamReader = new StreamReader(expectedFileName);
-            
-            Bitmap init = new Bitmap(initstreamReader.BaseStream);
-            Bitmap expected = new Bitmap(expectedStreamReader.BaseStream); 
 
-            Bitmap actual =  (new BlackWhite()).algo(init);
+            Bitmap init = new Bitmap(initstreamReader.BaseStream);
+            Bitmap expected = new Bitmap(expectedStreamReader.BaseStream);
+
+            Bitmap actual = (new BlackWhite()).algo(init);
             Assert.AreEqual(expected, actual);
         }
     }

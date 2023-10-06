@@ -27,7 +27,7 @@ namespace TP1_SergioCeline.AlgoFilters
                     byte blue = image.GetPixel(x, y).B;
 
                     // Change the colors
-                    result.SetPixel(x, y, Color.FromArgb(red / dividers.red, green / dividers.green, blue / dividers.green)) ;
+                    result.SetPixel(x, y, Color.FromArgb(red / dividers.red, green / dividers.green, blue / dividers.green));
                 }
 
             }
@@ -47,7 +47,7 @@ namespace TP1_SergioCeline.AlgoFilters
             int currentArea = (int)(horizontalPixel / sideWidth);
 
             // Calculate the dividers in function of the current position
-            switch(currentArea)
+            switch (currentArea)
             {
                 case 0:
                     red = 5;
@@ -67,6 +67,68 @@ namespace TP1_SergioCeline.AlgoFilters
             }
 
             return (red, green, blue);
+        }
+    }
+}
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Drawing;
+using TP1_SergioCeline.AlgoFilters;
+
+namespace TP1_SergioCeline.UnitTests
+{
+    [TestClass]
+    public class RainbowTests
+    {
+        [TestMethod]
+        public void Rainbow_Algo_ReturnsCorrectImage()
+        {
+            // Arrange
+            Rainbow rainbowFilter = new Rainbow();
+            Bitmap image = new Bitmap(100, 100);
+
+            // Act
+            Bitmap result = rainbowFilter.algo(image);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(image.Width, result.Width);
+            Assert.AreEqual(image.Height, result.Height);
+        }
+
+        [TestMethod]
+        public void GetDividers_ReturnsCorrectDividers()
+        {
+            // Arrange
+            Rainbow rainbowFilter = new Rainbow();
+
+            // Act
+            var dividers1 = rainbowFilter.GetDividers(10, 20);
+            var dividers2 = rainbowFilter.GetDividers(30, 20);
+            var dividers3 = rainbowFilter.GetDividers(50, 20);
+            var dividers4 = rainbowFilter.GetDividers(70, 20);
+            var dividers5 = rainbowFilter.GetDividers(90, 20);
+
+            // Assert
+            Assert.AreEqual(1, dividers1.red);
+            Assert.AreEqual(1, dividers1.green);
+            Assert.AreEqual(1, dividers1.blue);
+
+            Assert.AreEqual(5, dividers2.red);
+            Assert.AreEqual(1, dividers2.green);
+            Assert.AreEqual(1, dividers2.blue);
+
+            Assert.AreEqual(1, dividers3.red);
+            Assert.AreEqual(5, dividers3.green);
+            Assert.AreEqual(1, dividers3.blue);
+
+            Assert.AreEqual(5, dividers4.red);
+            Assert.AreEqual(1, dividers4.green);
+            Assert.AreEqual(5, dividers4.blue);
+
+            Assert.AreEqual(5, dividers5.red);
+            Assert.AreEqual(5, dividers5.green);
+            Assert.AreEqual(5, dividers5.blue);
         }
     }
 }
