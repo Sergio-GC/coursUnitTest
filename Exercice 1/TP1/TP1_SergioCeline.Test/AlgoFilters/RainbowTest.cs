@@ -19,23 +19,35 @@ namespace TP1_SergioCeline.Test.AlgoFilters
             _rainbow = new Rainbow();
         }
 
-        #region test1
+        private readonly string _directoryPath = "C:\\Unit tests projects\\coursUnitTest\\Exercice 1\\TP1\\TP1_SergioCeline.Test\\images\\";
+
+        #region Rainbow filter test
         [TestMethod]
         public void Rainbow_Algo_ReturnsCorrectImage()
         {
             // Arrange
-            Bitmap image = new Bitmap(100, 100);
+            Bitmap initBitmap = new($"{_directoryPath}/init.png");
+            Bitmap expectedBitmap = new($"{_directoryPath}/rainbows.png");
 
             // Act
-            Bitmap result = _rainbow.algo(image);
+            Bitmap resultBitmap = _rainbow.algo(initBitmap);
 
             // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(image.Width, result.Width);
-            Assert.AreEqual(image.Height, result.Height);
+            Assert.IsNotNull(resultBitmap);
+            Assert.AreEqual(initBitmap.Width, resultBitmap.Width);
+            Assert.AreEqual(initBitmap.Height, resultBitmap.Height);
+
+            for (int i = 0; i < expectedBitmap.Width; i++)
+            {
+                for (int j = 0; j < expectedBitmap.Height; j++)
+                {
+                    Assert.AreEqual(expectedBitmap.GetPixel(i, j), resultBitmap.GetPixel(i, j));
+                }
+            }
         }
         #endregion
 
+        #region Dividers test
         [TestMethod]
         public void GetDividers_ReturnsCorrectDividers()
         {
@@ -47,17 +59,17 @@ namespace TP1_SergioCeline.Test.AlgoFilters
             var dividers5 = _rainbow.GetDividers(90, 20);
 
             // Assert
-            Assert.AreEqual(1, dividers1.red);
+            Assert.AreEqual(5, dividers1.red);
             Assert.AreEqual(1, dividers1.green);
             Assert.AreEqual(1, dividers1.blue);
 
-            Assert.AreEqual(5, dividers2.red);
-            Assert.AreEqual(1, dividers2.green);
+            Assert.AreEqual(1, dividers2.red);
+            Assert.AreEqual(5, dividers2.green);
             Assert.AreEqual(1, dividers2.blue);
 
             Assert.AreEqual(1, dividers3.red);
-            Assert.AreEqual(5, dividers3.green);
-            Assert.AreEqual(1, dividers3.blue);
+            Assert.AreEqual(1, dividers3.green);
+            Assert.AreEqual(5, dividers3.blue);
 
             Assert.AreEqual(5, dividers4.red);
             Assert.AreEqual(1, dividers4.green);
@@ -67,5 +79,6 @@ namespace TP1_SergioCeline.Test.AlgoFilters
             Assert.AreEqual(5, dividers5.green);
             Assert.AreEqual(5, dividers5.blue);
         }
+        #endregion
     }
 }
