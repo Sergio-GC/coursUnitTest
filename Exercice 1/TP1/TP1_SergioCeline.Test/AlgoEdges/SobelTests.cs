@@ -11,8 +11,6 @@ namespace TP1_SergioCeline.Test.AlgoEdges
         string directoryPath = "D:\\Ecole\\semestre7\\TestUnitaire\\Exercices\\Exercice 1\\TP1\\TP1_SergioCeline.Test\\images\\";
 
         [TestMethod]
-        [DeploymentItem(@"images/init.png")]
-        [DeploymentItem(@"images/sobel.png")]
         public void Algo_ShouldReturnBitmap()
         {
             // Arrange
