@@ -8,15 +8,15 @@ namespace TP1_SergioCeline.Test.AlgoEdges
     public class SobelTests
     {
 
-        string directoryPath = "D:\\Ecole\\semestre7\\TestUnitaire\\Exercices\\Exercice 1\\TP1\\TP1_SergioCeline.Test\\images\\";
+        string _directoryPath = "D:\\Ecole\\semestre7\\TestUnitaire\\Exercices\\Exercice 1\\TP1\\TP1_SergioCeline.Test\\images\\";
 
         [TestMethod]
         public void Algo_ShouldReturnBitmap()
         {
             // Arrange
             Sobel sobel = new Sobel();
-            Bitmap initBitmap = new Bitmap($"{directoryPath}/init.png");
-            Bitmap expectedBitmap = new Bitmap($"{directoryPath}/sobel.png");
+            Bitmap initBitmap = new Bitmap($"{_directoryPath}/init.png");
+            Bitmap expectedBitmap = new Bitmap($"{_directoryPath}/sobel.png");
 
             // Act
             Bitmap resultBitmap = sobel.algo(initBitmap);
