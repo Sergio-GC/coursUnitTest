@@ -40,7 +40,7 @@ namespace TP1_SergioCeline.AlgoFilters
         /// <param name="horizontalPixel">Position of the current pixel horizontally (by the width)</param>
         /// <param name="sideWidth">Width of each side to determine in which size is the pixel</param>
         /// <returns>Red, green and blue variables containing the division value</returns>
-        private (int red, int green, int blue) GetDividers(int horizontalPixel, float sideWidth)
+        public (int red, int green, int blue) GetDividers(int horizontalPixel, float sideWidth)
         {
             // By default, dividers are equal to 1
             int red = 1, green = 1, blue = 1;
@@ -67,68 +67,6 @@ namespace TP1_SergioCeline.AlgoFilters
             }
 
             return (red, green, blue);
-        }
-    }
-}
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Drawing;
-using TP1_SergioCeline.AlgoFilters;
-
-namespace TP1_SergioCeline.UnitTests
-{
-    [TestClass]
-    public class RainbowTests
-    {
-        [TestMethod]
-        public void Rainbow_Algo_ReturnsCorrectImage()
-        {
-            // Arrange
-            Rainbow rainbowFilter = new Rainbow();
-            Bitmap image = new Bitmap(100, 100);
-
-            // Act
-            Bitmap result = rainbowFilter.algo(image);
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(image.Width, result.Width);
-            Assert.AreEqual(image.Height, result.Height);
-        }
-
-        [TestMethod]
-        public void GetDividers_ReturnsCorrectDividers()
-        {
-            // Arrange
-            Rainbow rainbowFilter = new Rainbow();
-
-            // Act
-            var dividers1 = rainbowFilter.GetDividers(10, 20);
-            var dividers2 = rainbowFilter.GetDividers(30, 20);
-            var dividers3 = rainbowFilter.GetDividers(50, 20);
-            var dividers4 = rainbowFilter.GetDividers(70, 20);
-            var dividers5 = rainbowFilter.GetDividers(90, 20);
-
-            // Assert
-            Assert.AreEqual(1, dividers1.red);
-            Assert.AreEqual(1, dividers1.green);
-            Assert.AreEqual(1, dividers1.blue);
-
-            Assert.AreEqual(5, dividers2.red);
-            Assert.AreEqual(1, dividers2.green);
-            Assert.AreEqual(1, dividers2.blue);
-
-            Assert.AreEqual(1, dividers3.red);
-            Assert.AreEqual(5, dividers3.green);
-            Assert.AreEqual(1, dividers3.blue);
-
-            Assert.AreEqual(5, dividers4.red);
-            Assert.AreEqual(1, dividers4.green);
-            Assert.AreEqual(5, dividers4.blue);
-
-            Assert.AreEqual(5, dividers5.red);
-            Assert.AreEqual(5, dividers5.green);
-            Assert.AreEqual(5, dividers5.blue);
         }
     }
 }

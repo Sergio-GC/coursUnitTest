@@ -25,4 +25,4 @@ namespace TP1_SergioCeline.AlgoFilters
             return image;
         }
     }
-}}
+}
