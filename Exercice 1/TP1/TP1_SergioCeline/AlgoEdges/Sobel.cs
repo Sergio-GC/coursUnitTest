@@ -36,27 +36,3 @@
     }
 }
 
-using NUnit.Framework;
-using System.Drawing;
-using TP1_SergioCeline.AlgoEdges;
-
-namespace TP1_SergioCeline.UnitTests
-{
-    [TestFixture]
-    public class SobelTests
-    {
-        [Test]
-        public void Algo_ShouldReturnBitmap()
-        {
-            // Arrange
-            Sobel sobel = new Sobel();
-            Bitmap init = new Bitmap(100, 100);
-
-            // Act
-            Bitmap result = sobel.algo(init);
-
-            // Assert
-            Assert.IsInstanceOf<Bitmap>(result);
-        }
-    }
-}
