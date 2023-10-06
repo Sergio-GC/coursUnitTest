@@ -12,7 +12,13 @@ namespace TP1_SergioCeline.Test.AlgoFilters
     [TestClass]
     public class ColorSwapTests
     {
-        private readonly ColorSwap cs = new();
+        private ColorSwap _cs;
+
+        [TestInitialize]
+        public void init()
+        {
+            _cs = new();
+        }
 
         // TODO delete test
         #region Test if the algorithm returns the same image when given a blank image
@@ -22,7 +28,7 @@ namespace TP1_SergioCeline.Test.AlgoFilters
             // Arrange
             Bitmap blankImage = new Bitmap(100, 100);
             // Act
-            Bitmap result = cs.algo(blankImage);
+            Bitmap result = _cs.algo(blankImage);
             // Assert
             Assert.AreEqual(blankImage.Width, result.Width);
             Assert.AreEqual(blankImage.Height, result.Height);
@@ -51,7 +57,7 @@ namespace TP1_SergioCeline.Test.AlgoFilters
             Bitmap image = new(1, 1);
             image.SetPixel(0, 0, Color.FromArgb(255, 10, 20, 30));
             // Act
-            Bitmap result = cs.algo(image);
+            Bitmap result = _cs.algo(image);
             // Assert
             Assert.AreEqual(image.Width, result.Width);
             Assert.AreEqual(image.Height, result.Height);
@@ -70,7 +76,7 @@ namespace TP1_SergioCeline.Test.AlgoFilters
             image.SetPixel(0, 1, Color.FromArgb(255, 70, 80, 90));
             image.SetPixel(1, 1, Color.FromArgb(255, 100, 110, 120));
             // Act
-            Bitmap result = cs.algo(image);
+            Bitmap result = _cs.algo(image);
             // Assert
             Assert.AreEqual(image.Width, result.Width);
             Assert.AreEqual(image.Height, result.Height);
