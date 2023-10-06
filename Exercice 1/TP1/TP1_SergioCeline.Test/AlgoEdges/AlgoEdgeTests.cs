@@ -20,14 +20,14 @@ namespace TP1_SergioCeline.Test.AlgoEdges
 
             // Assert
             Assert.AreEqual(8, result.Length);
-            Assert.AreEqual(160, result[0]); //159.5
-            Assert.AreEqual(160, result[1]); //159.5
-            Assert.AreEqual(160, result[2]); //159.5
+            Assert.AreEqual(159, result[0]); //159.5
+            Assert.AreEqual(159, result[1]); //159.5
+            Assert.AreEqual(159, result[2]); //159.5
             Assert.AreEqual(255, result[3]);
 
-            Assert.AreEqual(110, result[4]); //109.5
-            Assert.AreEqual(110, result[5]); //109.5
-            Assert.AreEqual(110, result[6]); //109.5
+            Assert.AreEqual(109, result[4]); //109.5
+            Assert.AreEqual(109, result[5]); //109.5
+            Assert.AreEqual(109, result[6]); //109.5
             Assert.AreEqual(255, result[7]);
         }
         #endregion

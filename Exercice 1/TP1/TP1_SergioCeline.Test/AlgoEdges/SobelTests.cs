@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Windows.Forms;
 using TP1_SergioCeline.AlgoEdges;
 
 namespace TP1_SergioCeline.Test.AlgoEdges
@@ -6,13 +7,18 @@ namespace TP1_SergioCeline.Test.AlgoEdges
     [TestClass]
     public class SobelTests
     {
+
+        string directoryPath = "D:\\Ecole\\semestre7\\TestUnitaire\\Exercices\\Exercice 1\\TP1\\TP1_SergioCeline.Test\\images\\";
+
         [TestMethod]
+        [DeploymentItem(@"images/init.png")]
+        [DeploymentItem(@"images/sobel.png")]
         public void Algo_ShouldReturnBitmap()
         {
             // Arrange
             Sobel sobel = new Sobel();
-            Bitmap initBitmap = new Bitmap(10, 10);
-            Bitmap expectedBitmap = new Bitmap(10, 10);
+            Bitmap initBitmap = new Bitmap($"{directoryPath}/init.png");
+            Bitmap expectedBitmap = new Bitmap($"{directoryPath}/sobel.png");
 
             // Act
             Bitmap resultBitmap = sobel.algo(initBitmap);
