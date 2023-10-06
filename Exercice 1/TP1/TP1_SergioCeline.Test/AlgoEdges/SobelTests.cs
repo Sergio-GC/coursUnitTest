@@ -1,5 +1,4 @@
-﻿using NUnit.Framework;
-using System.Drawing;
+﻿using System.Drawing;
 using TP1_SergioCeline.AlgoEdges;
 
 namespace TP1_SergioCeline.Test.AlgoEdges
@@ -27,7 +26,7 @@ namespace TP1_SergioCeline.Test.AlgoEdges
             {
                 for (int j = 0; j < expectedBitmap.Height; j++)
                 {
-                    Assert.AreEqual(expectedBitmap.Scan0[i, j], resultBitmap.Scan0[i, j]);
+                    Assert.AreEqual(expectedBitmap.GetPixel(i, j), resultBitmap.GetPixel(i, j));
                 }
             }
         }
