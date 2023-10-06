@@ -12,7 +12,12 @@ namespace TP1_SergioCeline.Test.AlgoFilters
     [TestClass]
     public class RainbowTest
     {
-        Rainbow rainbow = new();
+        private Rainbow _rainbow;
+        [TestInitialize]
+        public void init()
+        {
+            _rainbow = new Rainbow();
+        }
 
         #region test1
         [TestMethod]
@@ -22,7 +27,7 @@ namespace TP1_SergioCeline.Test.AlgoFilters
             Bitmap image = new Bitmap(100, 100);
 
             // Act
-            Bitmap result = rainbow.algo(image);
+            Bitmap result = _rainbow.algo(image);
 
             // Assert
             Assert.IsNotNull(result);
@@ -35,11 +40,11 @@ namespace TP1_SergioCeline.Test.AlgoFilters
         public void GetDividers_ReturnsCorrectDividers()
         {
             // Act
-            var dividers1 = rainbow.GetDividers(10, 20);
-            var dividers2 = rainbow.GetDividers(30, 20);
-            var dividers3 = rainbow.GetDividers(50, 20);
-            var dividers4 = rainbow.GetDividers(70, 20);
-            var dividers5 = rainbow.GetDividers(90, 20);
+            var dividers1 = _rainbow.GetDividers(10, 20);
+            var dividers2 = _rainbow.GetDividers(30, 20);
+            var dividers3 = _rainbow.GetDividers(50, 20);
+            var dividers4 = _rainbow.GetDividers(70, 20);
+            var dividers5 = _rainbow.GetDividers(90, 20);
 
             // Assert
             Assert.AreEqual(1, dividers1.red);
