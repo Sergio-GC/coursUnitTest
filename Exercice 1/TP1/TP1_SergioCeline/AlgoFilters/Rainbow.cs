@@ -27,7 +27,7 @@ namespace TP1_SergioCeline.AlgoFilters
                     byte blue = image.GetPixel(x, y).B;
 
                     // Change the colors
-                    result.SetPixel(x, y, Color.FromArgb(red / dividers.red, green / dividers.green, blue / dividers.green));
+                    result.SetPixel(x, y, Color.FromArgb(red / dividers.red, green / dividers.green, blue / dividers.blue));
                 }
 
             }
