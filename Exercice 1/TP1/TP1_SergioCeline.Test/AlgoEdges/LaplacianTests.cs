@@ -1,16 +1,28 @@
 ﻿using System.Drawing;
+using System.Text.Json;
 using TP1_SergioCeline.AlgoEdges;
+using static TP1_SergioCeline.Test.AlgoEdges.LaplacianTests;
 
 namespace TP1_SergioCeline.Test.AlgoEdges
 {
     [TestClass]
     public class LaplacianTests
     {
-        string _directoryPath = "D:\\Ecole\\semestre7\\TestUnitaire\\Exercices\\Exercice 1\\TP1\\TP1_SergioCeline.Test\\images\\";
+        private TestConfig testConfig;
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            string json = File.ReadAllText("testImageConfig.json");
+            testConfig = JsonSerializer.Deserialize<TestConfig>(json);
+        }
+
 
         [TestMethod]
         public void Algo_WithValidBitmap_ReturnsResultBitmap()
         {
+            string _directoryPath = testConfig.ImageDirectoryPath;
+
             // Arrange
             Bitmap initBitmap = new Bitmap($"{_directoryPath}/init.png");
             Bitmap expectedBitmap = new Bitmap($"{_directoryPath}/Laplacian.png");

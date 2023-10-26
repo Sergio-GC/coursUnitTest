@@ -12,6 +12,7 @@ Debug
 Release
 bin
 obj
+testImageConfig.json
 
 # Add .cache files
 **/.cache

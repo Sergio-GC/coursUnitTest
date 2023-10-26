@@ -1,5 +1,5 @@
 ﻿using System.Drawing;
-using System.Windows.Forms;
+using System.Text.Json;
 using TP1_SergioCeline.AlgoEdges;
 
 namespace TP1_SergioCeline.Test.AlgoEdges
@@ -7,16 +7,26 @@ namespace TP1_SergioCeline.Test.AlgoEdges
     [TestClass]
     public class SobelTests
     {
+        private TestConfig testConfig;
 
-        string _directoryPath = "D:\\Ecole\\semestre7\\TestUnitaire\\Exercices\\Exercice 1\\TP1\\TP1_SergioCeline.Test\\images\\";
+        [TestInitialize]
+        public void Initialize()
+        {
+            string json = File.ReadAllText("testImageConfig.json");
+            testConfig = JsonSerializer.Deserialize<TestConfig>(json);
+        }
+
 
         [TestMethod]
         public void Algo_ShouldReturnBitmap()
         {
+            string _directoryPath = testConfig.ImageDirectoryPath;
+
             // Arrange
             Sobel sobel = new Sobel();
             Bitmap initBitmap = new Bitmap($"{_directoryPath}/init.png");
             Bitmap expectedBitmap = new Bitmap($"{_directoryPath}/sobel.png");
+
 
             // Act
             Bitmap resultBitmap = sobel.algo(initBitmap);

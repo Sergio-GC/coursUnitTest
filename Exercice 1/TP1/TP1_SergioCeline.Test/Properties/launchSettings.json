@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TP1_SergioCeline.Test": {
+      "commandName": "Project",
+      "workingDirectory": "$(ProjectDir)"
+    }
+  }
+}

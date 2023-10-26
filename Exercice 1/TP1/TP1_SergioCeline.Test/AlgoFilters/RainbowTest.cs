@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using TP1_SergioCeline.AlgoFilters;
 
@@ -12,19 +13,23 @@ namespace TP1_SergioCeline.Test.AlgoFilters
     [TestClass]
     public class RainbowTest
     {
+        private TestConfig testConfig;
         private Rainbow _rainbow;
+
         [TestInitialize]
         public void init()
         {
             _rainbow = new Rainbow();
+            string json = File.ReadAllText("testImageConfig.json");
+            testConfig = JsonSerializer.Deserialize<TestConfig>(json);
         }
-
-        private readonly string _directoryPath = "C:\\Unit tests projects\\coursUnitTest\\Exercice 1\\TP1\\TP1_SergioCeline.Test\\images\\";
 
         #region Rainbow filter test
         [TestMethod]
         public void Rainbow_Algo_ReturnsCorrectImage()
         {
+            string _directoryPath = testConfig.ImageDirectoryPath;
+
             // Arrange
             Bitmap initBitmap = new($"{_directoryPath}/init.png");
             Bitmap expectedBitmap = new($"{_directoryPath}/rainbows.png");

@@ -20,4 +20,10 @@
     <ProjectReference Include="..\TP1_SergioCeline\TP1_SergioCeline.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="testImageConfig.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
