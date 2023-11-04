@@ -121,7 +121,7 @@ namespace TP1_SergioCeline.AlgoEdges
 
             return resultBitmap;
         }
-       
+
 
         /// <summary>
         /// Use a matrix to appliy a filter in X and Y
@@ -261,7 +261,7 @@ namespace TP1_SergioCeline.AlgoEdges
 
             return pixelBuffer;
         }
-        
+
         public override string ToString()
         {
             return Text;
