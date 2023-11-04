@@ -3,7 +3,7 @@
     public class BlackWhite : AlgoFilter
     {
         public BlackWhite() : base("Black & White") { }
-        public override Bitmap algo(Bitmap image)
+        protected override Bitmap algo(Bitmap image)
         {
 
             for (int x = 0; x < image.Width; x++)

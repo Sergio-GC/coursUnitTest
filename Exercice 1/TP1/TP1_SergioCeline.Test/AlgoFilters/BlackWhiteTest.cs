@@ -8,7 +8,7 @@ namespace TP1_SergioCeline.Test.AlgoFilters
     public class BlackWhiteTest
     {
         [TestMethod]
-        public void BlackWhite_Algo_ReturnsBlackAndWhiteImage()
+        public void ExecuteAlgo_ReturnsBlackAndWhiteImage()
         {
             // Arrange
             Bitmap image = new Bitmap(2, 2);
@@ -20,7 +20,7 @@ namespace TP1_SergioCeline.Test.AlgoFilters
             BlackWhite blackWhite = new BlackWhite();
 
             // Act
-            Bitmap result = blackWhite.algo(image);
+            Bitmap result = blackWhite.ExecuteAlgo(image);
 
             // Assert
             Assert.AreEqual(Color.FromArgb(85, 85, 85), result.GetPixel(0, 0)); // Dark gray

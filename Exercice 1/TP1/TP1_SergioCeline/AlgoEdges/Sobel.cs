@@ -24,7 +24,7 @@
             }
         }
         public Sobel() : base("Sobel") { }
-        public override Bitmap algo(Bitmap init)
+        protected override Bitmap algo(Bitmap init)
         {
             Bitmap resultBitmap = ConvolutionFilterXY(init,
                                                  Sobel3x3Horizontal,

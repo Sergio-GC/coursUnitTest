@@ -13,7 +13,7 @@
             }
         }
         public Laplacian() : base("Laplacian 5x5 of Gaussian 5x5") { }
-        public override Bitmap algo(Bitmap init)
+        protected override Bitmap algo(Bitmap init)
         {
             Bitmap resultBitmap = ConvolutionFilterX(init,
                                     Laplacian3x3, 1.0, 0, true);

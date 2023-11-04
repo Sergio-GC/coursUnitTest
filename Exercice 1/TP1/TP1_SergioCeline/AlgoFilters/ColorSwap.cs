@@ -4,7 +4,7 @@
     {
         public ColorSwap() : base("Color swap") { }
 
-        public override Bitmap algo(Bitmap image)
+        protected override Bitmap algo(Bitmap image)
         {
             Bitmap result = new Bitmap(image.Width, image.Height);
 

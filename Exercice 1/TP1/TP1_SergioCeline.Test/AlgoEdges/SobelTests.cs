@@ -10,7 +10,7 @@ namespace TP1_SergioCeline.Test.AlgoEdges
         string _directoryPath = "images";
 
         [TestMethod]
-        public void Algo_ShouldReturnBitmap()
+        public void ExecuteAlgo_ReturnsResultBitmap()
         {
             // Arrange
             Sobel sobel = new Sobel();
@@ -18,7 +18,7 @@ namespace TP1_SergioCeline.Test.AlgoEdges
             Bitmap expectedBitmap = new Bitmap($"{_directoryPath}/sobel.png");
 
             // Act
-            Bitmap resultBitmap = sobel.algo(initBitmap);
+            Bitmap resultBitmap = sobel.ExecuteAlgo(initBitmap);
 
             // Assert
             Assert.IsNotNull(resultBitmap);

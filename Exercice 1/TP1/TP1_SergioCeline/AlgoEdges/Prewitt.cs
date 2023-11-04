@@ -2,7 +2,7 @@
 {
     public class Prewitt : AlgoEdge
     {
-        public static double[,] Prewitt3x3Horizontal
+        private static double[,] Prewitt3x3Horizontal
         {
             get
             {
@@ -13,7 +13,7 @@
             }
         }
 
-        public static double[,] Prewitt3x3Vertical
+        private static double[,] Prewitt3x3Vertical
         {
             get
             {
@@ -24,7 +24,7 @@
             }
         }
         public Prewitt() : base("Prewitt Grayscale") { }
-        public override Bitmap algo(Bitmap init)
+        protected override Bitmap algo(Bitmap init)
         {
             Bitmap resultBitmap = ConvolutionFilterXY(init,
                                                  Prewitt3x3Horizontal,

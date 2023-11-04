@@ -11,7 +11,16 @@ namespace TP1_SergioCeline.AlgoEdges
         }
         public string Text { get; set; }
 
-        public abstract Bitmap algo(Bitmap init);
+        public Bitmap ExecuteAlgo(Bitmap init)
+        {
+            if(init == null)
+            {
+                throw new ArgumentNullException();
+            }
+            return algo(init);
+        }
+
+        protected abstract Bitmap algo(Bitmap init);
 
         /// <summary>
         /// Use a matrix to appliy a filter in X 

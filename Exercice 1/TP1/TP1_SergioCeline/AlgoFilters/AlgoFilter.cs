@@ -6,7 +6,17 @@
             Text = text;
         }
         public string Text { get; set; }
-        public abstract Bitmap algo(Bitmap image);
+
+        public Bitmap ExecuteAlgo(Bitmap init)
+        {
+            if (init == null)
+            {
+                throw new ArgumentNullException();
+            }
+            return algo(init);
+        }
+
+        protected abstract Bitmap algo(Bitmap image);
         public override string ToString()
         {
             return Text;

@@ -4,20 +4,21 @@ using TP1_SergioCeline.AlgoEdges;
 namespace TP1_SergioCeline.Test.AlgoEdges
 {
     [TestClass]
-    public class LaplacianTests
+    public class PrewittTests
     {
-        string _directoryPath="images";
+
+        string _directoryPath = "images";
 
         [TestMethod]
         public void ExecuteAlgo_ReturnsResultBitmap()
         {
             // Arrange
+            Prewitt prewitt = new Prewitt();
             Bitmap initBitmap = new Bitmap($"{_directoryPath}/init.png");
-            Bitmap expectedBitmap = new Bitmap($"{_directoryPath}/Laplacian.png");
-            Laplacian laplacian = new Laplacian();
+            Bitmap expectedBitmap = new Bitmap($"{_directoryPath}/prewitt.png");
 
             // Act
-            Bitmap resultBitmap = laplacian.ExecuteAlgo(initBitmap);
+            Bitmap resultBitmap = prewitt.ExecuteAlgo(initBitmap);
 
             // Assert
             Assert.IsNotNull(resultBitmap);
@@ -31,7 +32,7 @@ namespace TP1_SergioCeline.Test.AlgoEdges
                     Assert.AreEqual(expectedBitmap.GetPixel(i, j), resultBitmap.GetPixel(i, j));
                 }
             }
-
         }
     }
 }
+
