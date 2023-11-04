@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using System.Windows.Forms;
 using TP1_SergioCeline.AlgoEdges;
 
 namespace TP1_SergioCeline.Test.AlgoEdges
@@ -8,7 +7,7 @@ namespace TP1_SergioCeline.Test.AlgoEdges
     public class SobelTests
     {
 
-        string _directoryPath = "D:\\Ecole\\semestre7\\TestUnitaire\\Exercices\\Exercice 1\\TP1\\TP1_SergioCeline.Test\\images\\";
+        string _directoryPath = "images";
 
         [TestMethod]
         public void Algo_ShouldReturnBitmap()

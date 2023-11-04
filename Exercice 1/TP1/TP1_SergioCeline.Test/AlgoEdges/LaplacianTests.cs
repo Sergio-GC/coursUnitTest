@@ -6,7 +6,7 @@ namespace TP1_SergioCeline.Test.AlgoEdges
     [TestClass]
     public class LaplacianTests
     {
-        string _directoryPath = "D:\\Ecole\\semestre7\\TestUnitaire\\Exercices\\Exercice 1\\TP1\\TP1_SergioCeline.Test\\images\\";
+        string _directoryPath="images";
 
         [TestMethod]
         public void Algo_WithValidBitmap_ReturnsResultBitmap()

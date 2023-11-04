@@ -20,4 +20,19 @@
     <ProjectReference Include="..\TP1_SergioCeline\TP1_SergioCeline.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="images\init.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\Laplacian.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\rainbows.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\sobel.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

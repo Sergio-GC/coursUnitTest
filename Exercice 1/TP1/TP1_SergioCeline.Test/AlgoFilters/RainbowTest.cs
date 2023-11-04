@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,13 +14,14 @@ namespace TP1_SergioCeline.Test.AlgoFilters
     public class RainbowTest
     {
         private Rainbow _rainbow;
+        string _directoryPath = "images";
+
         [TestInitialize]
-        public void init()
+        public void Init()
         {
             _rainbow = new Rainbow();
         }
 
-        private readonly string _directoryPath = "C:\\Unit tests projects\\coursUnitTest\\Exercice 1\\TP1\\TP1_SergioCeline.Test\\images\\";
 
         #region Rainbow filter test
         [TestMethod]
