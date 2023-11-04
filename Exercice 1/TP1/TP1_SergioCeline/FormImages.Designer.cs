@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             pbInit = new PictureBox();
-            cmbAlgoEdge = new ComboBox();
+            cmbEdgeDetection = new ComboBox();
             btnLoadPicture = new Button();
             btnTransform = new Button();
             btnSavePicture = new Button();
             pbResult = new PictureBox();
             lbFilter = new ListBox();
+            btnReset = new Button();
             ((System.ComponentModel.ISupportInitialize)pbInit).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbResult).BeginInit();
             SuspendLayout();
@@ -48,13 +49,13 @@
             pbInit.TabIndex = 0;
             pbInit.TabStop = false;
             // 
-            // cmbAlgoEdge
+            // cmbEdgeDetection
             // 
-            cmbAlgoEdge.FormattingEnabled = true;
-            cmbAlgoEdge.Location = new Point(451, 236);
-            cmbAlgoEdge.Name = "cmbAlgoEdge";
-            cmbAlgoEdge.Size = new Size(185, 33);
-            cmbAlgoEdge.TabIndex = 2;
+            cmbEdgeDetection.FormattingEnabled = true;
+            cmbEdgeDetection.Location = new Point(451, 229);
+            cmbEdgeDetection.Name = "cmbEdgeDetection";
+            cmbEdgeDetection.Size = new Size(185, 33);
+            cmbEdgeDetection.TabIndex = 2;
             // 
             // btnLoadPicture
             // 
@@ -68,7 +69,7 @@
             // 
             // btnTransform
             // 
-            btnTransform.Location = new Point(451, 287);
+            btnTransform.Location = new Point(451, 282);
             btnTransform.Name = "btnTransform";
             btnTransform.Size = new Size(185, 48);
             btnTransform.TabIndex = 4;
@@ -78,7 +79,7 @@
             // 
             // btnSavePicture
             // 
-            btnSavePicture.Location = new Point(451, 390);
+            btnSavePicture.Location = new Point(451, 336);
             btnSavePicture.Name = "btnSavePicture";
             btnSavePicture.Size = new Size(185, 48);
             btnSavePicture.TabIndex = 5;
@@ -99,23 +100,34 @@
             // 
             lbFilter.FormattingEnabled = true;
             lbFilter.ItemHeight = 25;
-            lbFilter.Location = new Point(451, 84);
+            lbFilter.Location = new Point(451, 80);
             lbFilter.Name = "lbFilter";
             lbFilter.SelectionMode = SelectionMode.MultiSimple;
             lbFilter.Size = new Size(185, 129);
             lbFilter.TabIndex = 7;
+            // 
+            // btnReset
+            // 
+            btnReset.Location = new Point(451, 390);
+            btnReset.Name = "btnReset";
+            btnReset.Size = new Size(185, 48);
+            btnReset.TabIndex = 8;
+            btnReset.Text = "Reset";
+            btnReset.UseVisualStyleBackColor = true;
+            btnReset.Click += btnReset_Click;
             // 
             // FormImages
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1115, 455);
+            Controls.Add(btnReset);
+            Controls.Add(cmbEdgeDetection);
             Controls.Add(lbFilter);
             Controls.Add(pbResult);
             Controls.Add(btnSavePicture);
             Controls.Add(btnTransform);
             Controls.Add(btnLoadPicture);
-            Controls.Add(cmbAlgoEdge);
             Controls.Add(pbInit);
             Name = "FormImages";
             Text = "Form1";
@@ -127,11 +139,12 @@
         #endregion
 
         private PictureBox pbInit;
-        private ComboBox cmbAlgoEdge;
+        private ComboBox cmbEdgeDetection;
         private Button btnLoadPicture;
         private Button btnTransform;
         private Button btnSavePicture;
         private PictureBox pbResult;
         private ListBox lbFilter;
+        private Button btnReset;
     }
 }

@@ -6,7 +6,7 @@ namespace TP1_SergioCeline
 {
     public partial class FormImages : Form
     {
-        AlgoEdge[] algoEdge = { new Laplacian(), new Sobel() };
+        AlgoEdge[] algoEdge = { new NoEdgeDetection(), new Laplacian(), new Sobel(), new Prewitt() };
         AlgoFilter[] filters = { new Rainbow(), new BlackWhite(), new ColorSwap() };
         public FormImages()
         {
@@ -22,8 +22,8 @@ namespace TP1_SergioCeline
 
         private void InitCmbAlgoEdge()
         {
-            cmbAlgoEdge.Items.AddRange(algoEdge);
-            cmbAlgoEdge.SelectedIndex = 0;
+            cmbEdgeDetection.Items.AddRange(algoEdge);
+            cmbEdgeDetection.SelectedIndex = 0;
         }
 
         private void btnLoadPicture_Click(object sender, EventArgs e)
@@ -77,9 +77,17 @@ namespace TP1_SergioCeline
                 bitmap = ((AlgoFilter)item).algo(bitmap);
             }
             // application du Edge
-            bitmap = ((AlgoEdge)cmbAlgoEdge.SelectedItem).algo(bitmap);
+            bitmap = ((AlgoEdge)cmbEdgeDetection.SelectedItem).algo(bitmap);
 
             pbResult.Image = bitmap;
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            lbFilter.SelectedItems.Clear();
+            cmbEdgeDetection.SelectedIndex = 0;
+            pbResult.Image = null;
+            pbInit.Image = null;
         }
     }
 }
