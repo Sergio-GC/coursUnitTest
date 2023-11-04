@@ -1,6 +1,7 @@
 using System.Drawing.Imaging;
 using TP1_SergioCeline.AlgoEdges;
 using TP1_SergioCeline.AlgoFilters;
+using TP1_SergioCeline.FileAccess;
 
 namespace TP1_SergioCeline
 {
@@ -8,6 +9,9 @@ namespace TP1_SergioCeline
     {
         AlgoEdge[] algoEdge = { new Laplacian(), new Sobel() };
         AlgoFilter[] filters = { new Rainbow(), new BlackWhite(), new ColorSwap() };
+
+        IFileAccess fileAccess;
+
         public FormImages()
         {
             InitializeComponent();
@@ -28,44 +32,12 @@ namespace TP1_SergioCeline
 
         private void btnLoadPicture_Click(object sender, EventArgs e)
         {
-            OpenFileDialog OpenFileDialog = new OpenFileDialog();
-            OpenFileDialog.Title = "Select image ";
-            OpenFileDialog.Filter = "Jpeg Images(*.jpg)|*.jpg|Png Images(*.png)|*.png|Bitmap Images(*.bmp)|*.bmp";
-
-            if (OpenFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                StreamReader streamReader = new StreamReader(OpenFileDialog.FileName);
-                Bitmap imageInit = new Bitmap(streamReader.BaseStream);
-                streamReader.Close();
-
-                pbInit.Image = imageInit;
-
-            }
+            pbInit.Image = fileAccess.LoadImage();
         }
 
         private void btnSavePicture_Click(object sender, EventArgs e)
         {
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Title = "Specify a file name and file path";
-            sfd.Filter = "Png Images(*.png)|*.png|Jpeg Images(*.jpg)|*.jpg";
-            sfd.Filter += "|Bitmap Images(*.bmp)|*.bmp";
-
-            if (sfd.ShowDialog() == DialogResult.OK)
-            {
-                string fileExtension = Path.GetExtension(sfd.FileName).ToUpper();
-                ImageFormat imgFormat = ImageFormat.Png;
-
-                if (fileExtension == "BMP")
-                {
-                    imgFormat = ImageFormat.Bmp;
-                }
-                else if (fileExtension == "JPG")
-                {
-                    imgFormat = ImageFormat.Jpeg;
-                }
-                pbResult.Image.Save(sfd.FileName, imgFormat);
-
-            }
+            fileAccess.SaveImage(pbResult.Image);
         }
 
         private void btnTransform_Click(object sender, EventArgs e)

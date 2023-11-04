@@ -1,4 +1,6 @@
-﻿namespace TP1_SergioCeline
+﻿using TP1_SergioCeline.FileAccess;
+
+namespace TP1_SergioCeline
 {
     partial class FormImages
     {
@@ -28,6 +30,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            fileAccess = new LocalFileAccess();
+
             pbInit = new PictureBox();
             cmbAlgoEdge = new ComboBox();
             btnLoadPicture = new Button();

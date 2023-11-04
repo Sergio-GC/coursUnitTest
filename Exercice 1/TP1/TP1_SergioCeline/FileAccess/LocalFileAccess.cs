@@ -2,7 +2,7 @@
 
 namespace TP1_SergioCeline.FileAccess
 {
-    public class FileAccess : IFileAccess
+    public class LocalFileAccess : IFileAccess
     {
         /// <summary>
         /// Ask the user for a file to upload in any of the accepted formats, which are png, jpg and bmp.
@@ -52,13 +52,13 @@ namespace TP1_SergioCeline.FileAccess
                 // Define the file extension
                 switch (fileExtension)
                 {
-                    case "PNG":
+                    case ".PNG":
                         imgFormat = ImageFormat.Png;
                         break;
-                    case "JPG":
+                    case ".JPG":
                         imgFormat = ImageFormat.Jpeg;
                         break;
-                    case "BMP":
+                    case ".BMP":
                         imgFormat = ImageFormat.Bmp;
                         break;
                 }
