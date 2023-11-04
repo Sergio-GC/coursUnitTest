@@ -1,9 +1,10 @@
 ﻿using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
+using TP1_SergioCeline.Business;
 
 namespace TP1_SergioCeline.AlgoEdges
 {
-    public abstract class AlgoEdge
+    public abstract class AlgoEdge 
     {
         public AlgoEdge(string text)
         {
@@ -15,7 +16,7 @@ namespace TP1_SergioCeline.AlgoEdges
         {
             if(init == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException("Please load a picture before");
             }
             return algo(init);
         }

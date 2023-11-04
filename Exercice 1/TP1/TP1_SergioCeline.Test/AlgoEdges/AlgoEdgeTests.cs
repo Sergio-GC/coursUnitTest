@@ -4,9 +4,18 @@ using TP1_SergioCeline.AlgoEdges;
 namespace TP1_SergioCeline.Test.AlgoEdges
 {
     [TestClass]
-    public class AlgoEdgeTests
+    public class AlgoFilterTests
     {
         #region TestExeption
+        [TestMethod]
+        public void ExecuteAlgo_ThrowArgumentNullException()
+        {
+            // Arrange
+            AlgoEdge algoTest = new Sobel();
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentNullException>(() => algoTest.ExecuteAlgo(null), "Please load a picture before");
+        }
 
         #endregion
 

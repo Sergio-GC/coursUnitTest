@@ -1,6 +1,6 @@
 ﻿namespace TP1_SergioCeline.AlgoFilters
 {
-    public abstract class AlgoFilter
+    public abstract class AlgoFilter 
     {
         public AlgoFilter(string text) {
             Text = text;
@@ -11,7 +11,7 @@
         {
             if (init == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException("Please load a picture before");
             }
             return algo(init);
         }

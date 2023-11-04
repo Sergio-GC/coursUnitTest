@@ -1,6 +1,7 @@
 using System.Drawing.Imaging;
 using TP1_SergioCeline.AlgoEdges;
 using TP1_SergioCeline.AlgoFilters;
+using TP1_SergioCeline.Business;
 using TP1_SergioCeline.FileAccess;
 
 namespace TP1_SergioCeline
@@ -10,13 +11,16 @@ namespace TP1_SergioCeline
         AlgoEdge[] algoEdge = { new NoEdgeDetection(), new Laplacian(), new Sobel(), new Prewitt() };
         AlgoFilter[] filters = { new Rainbow(), new BlackWhite(), new ColorSwap() };
 
-        IFileAccess fileAccess;
+        IFileAccess _fileAccess;
+        private IManager _manager;
 
         public FormImages()
         {
             InitializeComponent();
             InitCmbAlgoEdge();
             InitLbFilter();
+            _manager = new Manager();
+            _fileAccess = new LocalFileAccess();
         }
 
         private void InitLbFilter()
@@ -32,26 +36,38 @@ namespace TP1_SergioCeline
 
         private void btnLoadPicture_Click(object sender, EventArgs e)
         {
-            pbInit.Image = fileAccess.LoadImage();
+            try
+            {
+                pbInit.Image = _fileAccess.LoadImage();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnSavePicture_Click(object sender, EventArgs e)
         {
-            fileAccess.SaveImage(pbResult.Image);
+            try
+            {
+                _fileAccess.SaveImage(pbResult.Image);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnTransform_Click(object sender, EventArgs e)
         {
-            Bitmap bitmap = new Bitmap(pbInit.Image);
-            // application du filtre
-            foreach (var item in lbFilter.SelectedItems)
+            try
             {
-                bitmap = ((AlgoFilter)item).ExecuteAlgo(bitmap);
+                pbResult.Image = _manager.Process(pbInit.Image, lbFilter.SelectedItems.Cast<AlgoFilter>().ToList(), (AlgoEdge)cmbEdgeDetection.SelectedItem);
             }
-            // application du Edge
-            bitmap = ((AlgoEdge)cmbEdgeDetection.SelectedItem).ExecuteAlgo(bitmap);
-
-            pbResult.Image = bitmap;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnReset_Click(object sender, EventArgs e)

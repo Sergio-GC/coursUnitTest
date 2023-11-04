@@ -30,8 +30,6 @@ namespace TP1_SergioCeline
         /// </summary>
         private void InitializeComponent()
         {
-            fileAccess = new LocalFileAccess();
-
             pbInit = new PictureBox();
             cmbEdgeDetection = new ComboBox();
             btnLoadPicture = new Button();
@@ -104,7 +102,7 @@ namespace TP1_SergioCeline
             // 
             lbFilter.FormattingEnabled = true;
             lbFilter.ItemHeight = 25;
-            lbFilter.Location = new Point(451, 80);
+            lbFilter.Location = new Point(451, 79);
             lbFilter.Name = "lbFilter";
             lbFilter.SelectionMode = SelectionMode.MultiSimple;
             lbFilter.Size = new Size(185, 129);
@@ -134,7 +132,7 @@ namespace TP1_SergioCeline
             Controls.Add(btnLoadPicture);
             Controls.Add(pbInit);
             Name = "FormImages";
-            Text = "Form1";
+            Text = "Edge Detection";
             ((System.ComponentModel.ISupportInitialize)pbInit).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbResult).EndInit();
             ResumeLayout(false);
