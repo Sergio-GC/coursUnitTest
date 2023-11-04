@@ -1,6 +1,7 @@
 ﻿using NSubstitute;
 using System.Drawing;
 using TP1_SergioCeline.FileAccess;
+using TP1_SergioCeline.Test.Helper;
 using static System.Net.Mime.MediaTypeNames;
 using Image = System.Drawing.Image;
 
@@ -33,15 +34,7 @@ namespace TP1_SergioCeline.Test.FileAccess
 
             // Assert
             Assert.IsNotNull( obtained );
-            Assert.AreEqual(expected.Width, obtained.Width );
-            Assert.AreEqual(expected.Height, obtained.Height );
-            for(int w = 0; w < expected.Width; w++)
-            {
-                for(int h = 0; h < expected.Height; h++)
-                {
-                    Assert.AreEqual(expected.GetPixel(w, h), obtained.GetPixel(w, h));
-                }
-            }
+            EqualsHelper.CheckBitmapEquals(expected, obtained);
         }
 
 

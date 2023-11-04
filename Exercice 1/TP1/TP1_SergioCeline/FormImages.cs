@@ -18,8 +18,8 @@ namespace TP1_SergioCeline
             InitializeComponent();
             InitCmbAlgoEdge();
             InitLbFilter();
-            _manager = new Manager();
-            _fileAccess = new LocalFileAccess();
+            _manager = new Manager(new ConvertImage());
+            _fileAccess = new LocalFileAccess(new LocalPathDefiner());
         }
 
         private void InitLbFilter()

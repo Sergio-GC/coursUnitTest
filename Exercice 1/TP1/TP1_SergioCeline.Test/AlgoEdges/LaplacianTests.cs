@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using TP1_SergioCeline.AlgoEdges;
+using TP1_SergioCeline.Test.Helper;
 
 namespace TP1_SergioCeline.Test.AlgoEdges
 {
@@ -21,16 +22,7 @@ namespace TP1_SergioCeline.Test.AlgoEdges
 
             // Assert
             Assert.IsNotNull(resultBitmap);
-            Assert.AreEqual(initBitmap.Width, resultBitmap.Width);
-            Assert.AreEqual(initBitmap.Height, resultBitmap.Height);
-
-            for (int i = 0; i < expectedBitmap.Width; i++)
-            {
-                for (int j = 0; j < expectedBitmap.Height; j++)
-                {
-                    Assert.AreEqual(expectedBitmap.GetPixel(i, j), resultBitmap.GetPixel(i, j));
-                }
-            }
+            EqualsHelper.CheckBitmapEquals(expectedBitmap, resultBitmap);
 
         }
     }

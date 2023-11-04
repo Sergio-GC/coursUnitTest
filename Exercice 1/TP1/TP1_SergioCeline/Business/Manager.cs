@@ -5,13 +5,17 @@ namespace TP1_SergioCeline.Business
 {
     public class Manager : IManager
     {
+        IConvertImage _convert;
+        public Manager(IConvertImage convert) {
+            _convert = convert;
+        }
         public Image Process(Image image, List<AlgoFilter> filters, AlgoEdge edges)
         {
             if(image == null)
             {
                 throw new ArgumentNullException("Please load a picture before");
             }
-            Bitmap bitmap = new Bitmap(image);
+            Bitmap bitmap = _convert.ConvertToBitmap(image);
             // application du filtre
             foreach (var item in filters)
             {
@@ -21,6 +25,6 @@ namespace TP1_SergioCeline.Business
             bitmap = edges.ExecuteAlgo(bitmap);
 
             return bitmap;
-        }
+        } 
     }
 }
