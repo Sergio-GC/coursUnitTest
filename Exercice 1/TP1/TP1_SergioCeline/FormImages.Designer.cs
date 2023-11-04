@@ -30,6 +30,8 @@ namespace TP1_SergioCeline
         /// </summary>
         private void InitializeComponent()
         {
+            fileAccess = new LocalFileAccess();
+
             pbInit = new PictureBox();
             cmbEdgeDetection = new ComboBox();
             btnLoadPicture = new Button();

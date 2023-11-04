@@ -4,22 +4,25 @@ namespace TP1_SergioCeline.FileAccess
 {
     public class LocalFileAccess : IFileAccess
     {
+        private IPathDefiner _pathDefiner;
+        public LocalFileAccess(IPathDefiner pathDefiner)
+        {
+            _pathDefiner = pathDefiner;
+        }
+
         /// <summary>
         /// Ask the user for a file to upload in any of the accepted formats, which are png, jpg and bmp.
         /// </summary>
         /// <returns>Bitmap with the chosen image</returns>
         public Bitmap LoadImage()
         {
-            // Ask user for image
-            OpenFileDialog OpenFileDialog = new OpenFileDialog();
-            OpenFileDialog.Title = "Select image ";
-            OpenFileDialog.Filter = "Png Images(*.png)|*.png|Jpeg Images(*.jpg)|*.jpg|Bitmap Images(*.bmp)|*.bmp";
+            string file = _pathDefiner.DefinePath();
 
             // If user clicks on OK, load image, else return nothing
-            if (OpenFileDialog.ShowDialog() == DialogResult.OK)
+            if (file != null)
             {
                 // Load and return the image
-                StreamReader streamReader = new StreamReader(OpenFileDialog.FileName);
+                StreamReader streamReader = new StreamReader(file);
                 Bitmap imageInit = new Bitmap(streamReader.BaseStream);
                 streamReader.Close();
 
@@ -33,20 +36,19 @@ namespace TP1_SergioCeline.FileAccess
 
 
         /// <summary>
-        /// Save image at the chosen location by the user.
+        /// Save an image to the user's chosen path
         /// </summary>
-        /// <param name="image"></param>
-        public void SaveImage(Image image)
+        /// <param name="image">Image to be saved</param>
+        /// <returns>True when the save process was successful, else false</returns>
+        public bool SaveImage(Image image)
         {
             // Ask for save location
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Title = "Specify a file name and file path";
-            sfd.Filter = "Png Images(*.png)|*.png|Jpeg Images(*.jpg)|*.jpg|Bitmap Images(*.bmp)|*.bmp";
+            string file = _pathDefiner.DefinePath();
 
             // If user clicks on OK, save image else do nothing
-            if (sfd.ShowDialog() == DialogResult.OK)
+            if (file != null)
             {
-                string fileExtension = Path.GetExtension(sfd.FileName).ToUpper();
+                string fileExtension = Path.GetExtension(file).ToUpper();
                 ImageFormat imgFormat = null;
 
                 // Define the file extension
@@ -64,7 +66,13 @@ namespace TP1_SergioCeline.FileAccess
                 }
 
                 // Save the image
-                image.Save(sfd.FileName, imgFormat);
+                image.Save(file, imgFormat);
+
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }
