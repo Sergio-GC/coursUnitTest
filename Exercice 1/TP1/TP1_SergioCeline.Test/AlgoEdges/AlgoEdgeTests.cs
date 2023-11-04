@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using TP1_SergioCeline.AlgoEdges;
+﻿using TP1_SergioCeline.AlgoEdges;
 
 namespace TP1_SergioCeline.Test.AlgoEdges
 {

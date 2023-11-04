@@ -3,6 +3,6 @@
     public interface IFileAccess
     {
         Bitmap LoadImage();
-        void SaveImage(Image image);
+        bool SaveImage(Image image);
     }
 }

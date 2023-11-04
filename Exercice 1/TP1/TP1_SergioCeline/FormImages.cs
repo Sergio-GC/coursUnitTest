@@ -1,4 +1,3 @@
-using System.Drawing.Imaging;
 using TP1_SergioCeline.AlgoEdges;
 using TP1_SergioCeline.AlgoFilters;
 using TP1_SergioCeline.FileAccess;
