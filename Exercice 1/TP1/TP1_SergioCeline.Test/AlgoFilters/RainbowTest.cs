@@ -25,14 +25,14 @@ namespace TP1_SergioCeline.Test.AlgoFilters
 
         #region Rainbow filter test
         [TestMethod]
-        public void Rainbow_Algo_ReturnsCorrectImage()
+        public void ExecuteAlgo_ReturnsCorrectImage()
         {
             // Arrange
             Bitmap initBitmap = new($"{_directoryPath}/init.png");
             Bitmap expectedBitmap = new($"{_directoryPath}/rainbows.png");
 
             // Act
-            Bitmap resultBitmap = _rainbow.algo(initBitmap);
+            Bitmap resultBitmap = _rainbow.ExecuteAlgo(initBitmap);
 
             // Assert
             Assert.IsNotNull(resultBitmap);

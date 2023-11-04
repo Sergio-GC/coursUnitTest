@@ -4,7 +4,7 @@
     {
         public Rainbow() : base("Rainbow") { }
 
-        public override Bitmap algo(Bitmap image)
+        protected override Bitmap algo(Bitmap image)
         {
             Bitmap result = new Bitmap(image.Width, image.Height);
             int raz = image.Width / 5;

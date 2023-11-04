@@ -46,10 +46,10 @@ namespace TP1_SergioCeline
             // application du filtre
             foreach (var item in lbFilter.SelectedItems)
             {
-                bitmap = ((AlgoFilter)item).algo(bitmap);
+                bitmap = ((AlgoFilter)item).ExecuteAlgo(bitmap);
             }
             // application du Edge
-            bitmap = ((AlgoEdge)cmbEdgeDetection.SelectedItem).algo(bitmap);
+            bitmap = ((AlgoEdge)cmbEdgeDetection.SelectedItem).ExecuteAlgo(bitmap);
 
             pbResult.Image = bitmap;
         }

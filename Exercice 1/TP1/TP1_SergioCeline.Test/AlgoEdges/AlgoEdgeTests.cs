@@ -6,6 +6,10 @@ namespace TP1_SergioCeline.Test.AlgoEdges
     [TestClass]
     public class AlgoEdgeTests
     {
+        #region TestExeption
+
+        #endregion
+
         #region CalculGrayScal
 
         [TestMethod]

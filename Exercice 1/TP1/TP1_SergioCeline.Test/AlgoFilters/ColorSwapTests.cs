@@ -20,15 +20,14 @@ namespace TP1_SergioCeline.Test.AlgoFilters
             _cs = new();
         }
 
-        // TODO delete test
         #region Test if the algorithm returns the same image when given a blank image
         [TestMethod]
-        public void TestAlgo_BlankImage()
+        public void ExecuteAlgo_BlankImage()
         {
             // Arrange
             Bitmap blankImage = new Bitmap(100, 100);
             // Act
-            Bitmap result = _cs.algo(blankImage);
+            Bitmap result = _cs.ExecuteAlgo(blankImage);
             // Assert
             Assert.AreEqual(blankImage.Width, result.Width);
             Assert.AreEqual(blankImage.Height, result.Height);
@@ -51,13 +50,13 @@ namespace TP1_SergioCeline.Test.AlgoFilters
 
         #region Test that the color is correctly swapped in a single pixel
         [TestMethod]
-        public void TestAlgo_SinglePixel()
+        public void ExecuteAlgo_SinglePixel()
         {
             // Arrange
             Bitmap image = new(1, 1);
             image.SetPixel(0, 0, Color.FromArgb(255, 10, 20, 30));
             // Act
-            Bitmap result = _cs.algo(image);
+            Bitmap result = _cs.ExecuteAlgo(image);
             // Assert
             Assert.AreEqual(image.Width, result.Width);
             Assert.AreEqual(image.Height, result.Height);
@@ -67,7 +66,7 @@ namespace TP1_SergioCeline.Test.AlgoFilters
 
         #region Test if the algorithm correctly swaps the colors
         [TestMethod]
-        public void TestAlgo_NonBlankImage()
+        public void ExecuteAlgo_NonBlankImage()
         {
             // Arrange
             Bitmap image = new Bitmap(2, 2);
@@ -76,7 +75,7 @@ namespace TP1_SergioCeline.Test.AlgoFilters
             image.SetPixel(0, 1, Color.FromArgb(255, 70, 80, 90));
             image.SetPixel(1, 1, Color.FromArgb(255, 100, 110, 120));
             // Act
-            Bitmap result = _cs.algo(image);
+            Bitmap result = _cs.ExecuteAlgo(image);
             // Assert
             Assert.AreEqual(image.Width, result.Width);
             Assert.AreEqual(image.Height, result.Height);
