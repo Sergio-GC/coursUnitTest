@@ -2,6 +2,6 @@
 {
     public interface IPathDefiner
     {
-        string DefinePath();
+        string DefinePath(bool openMode);
     }
 }

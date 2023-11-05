@@ -1,4 +1,6 @@
-﻿namespace TP1_SergioCeline.FileAccess
+﻿using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+
+namespace TP1_SergioCeline.FileAccess
 {
     public class LocalPathDefiner : IPathDefiner
     {
@@ -6,16 +8,26 @@
         /// Ask the user for a file in their system
         /// </summary>
         /// <returns>Path to the chosen file</returns>
-        public string DefinePath()
+        public string DefinePath(bool openMode)
         {
-            // Ask user for image
-            OpenFileDialog OpenFileDialog = new OpenFileDialog();
-            OpenFileDialog.Title = "Select image ";
-            OpenFileDialog.Filter = "Png Images(*.png)|*.png|Jpeg Images(*.jpg)|*.jpg|Bitmap Images(*.bmp)|*.bmp";
+            FileDialog dialog;
 
-            if (OpenFileDialog.ShowDialog() == DialogResult.OK)
+            // Ask user for image
+            if (openMode)
             {
-                return OpenFileDialog.FileName;
+                dialog = new OpenFileDialog();
+                dialog.Title = "Select image";
+            }
+            else
+            {
+                dialog = new SaveFileDialog();
+                dialog.Title = "Specify a file name and file path";
+            }
+            dialog.Filter = "Png Images(*.png)|*.png|Jpeg Images(*.jpg)|*.jpg|Bitmap Images(*.bmp)|*.bmp";
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                return dialog.FileName;
             }
             else
             {

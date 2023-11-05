@@ -16,7 +16,7 @@ namespace TP1_SergioCeline.FileAccess
         /// <returns>Bitmap with the chosen image</returns>
         public Bitmap LoadImage()
         {
-            string file = _pathDefiner.DefinePath();
+            string file = _pathDefiner.DefinePath(true);
 
             // If user clicks on OK, load image, else return nothing
             if (file != null)
@@ -43,7 +43,7 @@ namespace TP1_SergioCeline.FileAccess
         public bool SaveImage(Image image)
         {
             // Ask for save location
-            string file = _pathDefiner.DefinePath();
+            string file = _pathDefiner.DefinePath(false);
 
             // If user clicks on OK, save image else do nothing
             if (file != null)

@@ -2,7 +2,6 @@
 using System.Drawing;
 using TP1_SergioCeline.FileAccess;
 using TP1_SergioCeline.Test.Helper;
-using static System.Net.Mime.MediaTypeNames;
 using Image = System.Drawing.Image;
 
 namespace TP1_SergioCeline.Test.FileAccess
@@ -15,14 +14,12 @@ namespace TP1_SergioCeline.Test.FileAccess
         [TestMethod]
         public void LoadImage_ReturnsImage()
         {
-
             // Create
             var pathDefiner = Substitute.For<IPathDefiner>();
             IFileAccess fileAccess = new LocalFileAccess(pathDefiner);
 
             // Set a return value
-            // fileAccess.LoadImage().Returns(new Bitmap($"{_directoryPath}/init.png"));
-            pathDefiner.DefinePath().Returns($"{_directoryPath}/init.png");
+            pathDefiner.DefinePath(true).Returns($"{_directoryPath}/init.png");
 
 
 
@@ -48,7 +45,7 @@ namespace TP1_SergioCeline.Test.FileAccess
             IFileAccess fileAccess = new LocalFileAccess(pathDefiner);
 
             // Set a return value
-            pathDefiner.DefinePath().Returns($"{_directoryPath}/test.png");
+            pathDefiner.DefinePath(false).Returns($"{_directoryPath}/test.png");
 
 
 
