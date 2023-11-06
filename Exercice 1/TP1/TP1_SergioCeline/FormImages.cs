@@ -10,7 +10,7 @@ namespace TP1_SergioCeline
         AlgoEdge[] algoEdge = { new NoEdgeDetection(), new Laplacian(), new Sobel(), new Prewitt() };
         AlgoFilter[] filters = { new Rainbow(), new BlackWhite(), new ColorSwap() };
 
-        IFileAccess _fileAccess;
+        private IFileAccess _fileAccess;
         private IManager _manager;
 
         public FormImages()
