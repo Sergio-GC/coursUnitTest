@@ -11,6 +11,7 @@ namespace TP1_SergioCeline.Test.FileAccess
     {
         string _directoryPath = "images";
 
+        #region Load
         [TestMethod]
         public void LoadImage_ReturnsImage()
         {
@@ -33,7 +34,27 @@ namespace TP1_SergioCeline.Test.FileAccess
             EqualsHelper.CheckBitmapEquals(expected, obtained);
         }
 
+        [TestMethod]
+        public void LoadImage_ThrowsExceptionForInvalidPath()
+        {
+            // Create
+            var emptyPathDefiner = Substitute.For<IPathDefiner>();
+            var nullPathDefiner = Substitute.For<IPathDefiner>();
+            IFileAccess emptyFileAccess = new LocalFileAccess(emptyPathDefiner);
+            IFileAccess nullFileAccess = new LocalFileAccess(nullPathDefiner);
 
+            // Set a return value
+            emptyPathDefiner.DefinePath(true).Returns("");
+            nullPathDefiner.DefinePath(true).Returns(callInfo => null!);
+
+
+            // Assert
+            Assert.ThrowsException<ArgumentException>(() => emptyFileAccess.LoadImage());
+            Assert.ThrowsException<ArgumentException>(() => nullFileAccess.LoadImage());
+        }
+        #endregion
+
+        #region Save
         [TestMethod]
         public void SaveImage_CreatesImage()
         {
@@ -50,11 +71,50 @@ namespace TP1_SergioCeline.Test.FileAccess
 
             // Assert
             Assert.AreEqual(true, fileAccess.SaveImage(img));
-            // tu pourrais controler que l'image est bien sauver quelque part 
-            // il me faut aussi un test du coup dans le cas ou ça marche pas du coup si on return par exemple un string vide "" et un autre si on retourne null
-            // pour le load c'est pareil
-            //(tu peux faire dans le if au lieu  !=null mettre string.isNullOrEmpty(varaible) ça controle les 2 en 1 )
-            // Tu peux aussi mettre des régions pour séparer les teste de sav et de load
+            // Test that the image is correctly saved
+            Image result = new Bitmap($"{_directoryPath}/test.png");
+            Assert.IsNotNull( result );
         }
+
+        [TestMethod]
+        public void SaveImage_ThrowsExceptionForInvalidPath()
+        {
+            Image img = new Bitmap($"{_directoryPath}/init.png");
+
+            // Create
+            var emptyPathDefiner = Substitute.For<IPathDefiner>();
+            var nullPathDefiner = Substitute.For<IPathDefiner>();
+            IFileAccess emptyFileAccess = new LocalFileAccess(emptyPathDefiner);
+            IFileAccess nullFileAccess = new LocalFileAccess(nullPathDefiner);
+
+            // Set a return value
+            emptyPathDefiner.DefinePath(false).Returns("");
+            nullPathDefiner.DefinePath(false).Returns(callInfo => null!);
+
+
+
+            // Assert
+            Assert.ThrowsException<ArgumentException>(() => emptyFileAccess.SaveImage(img));
+            Assert.ThrowsException<ArgumentException>(() => nullFileAccess.SaveImage(img));
+        }
+
+        [TestMethod]
+        public void SaveImage_ThrowsExceptionForEmptyImage()
+        {
+            Image img = null;
+
+            // Create
+            var pathDefiner = Substitute.For<IPathDefiner>();
+            IFileAccess fileAccess = new LocalFileAccess(pathDefiner);
+
+            // Set a return value
+            pathDefiner.DefinePath(false).Returns($"{_directoryPath}/test.png");
+
+
+
+            // Assert
+            Assert.ThrowsException<NullReferenceException>(() => fileAccess.SaveImage(img));
+        }
+        #endregion
     }
 }
