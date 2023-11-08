@@ -1,4 +1,5 @@
 ﻿using TP1_SergioCeline.AlgoEdges;
+using TP1_SergioCeline.AlgoFilters;
 
 namespace TP1_SergioCeline.Test.AlgoEdges
 {
@@ -18,7 +19,19 @@ namespace TP1_SergioCeline.Test.AlgoEdges
 
         #endregion
 
-        #region CalculGrayScal
+        #region TestOk
+
+        #region TestOk
+        [TestMethod]
+        public void ToString_ReturnTheGoodToString()
+        {
+            // Arrange
+            AlgoEdge algoTest = new Sobel();
+
+            // Act & Assert
+            Assert.AreEqual(algoTest.Text, algoTest.ToString());
+        }
+        #endregion
 
         [TestMethod]
         public void CalculGrayScal_ReturnsGrayScaleImage()

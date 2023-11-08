@@ -56,7 +56,7 @@ namespace TP1_SergioCeline.Test.FileAccess
 
         #region Save
         [TestMethod]
-        public void SaveImage_CreatesImage()
+        public void SaveImage_CreatesImagePNG()
         {
             Image img = new Bitmap($"{_directoryPath}/init.png");
 
@@ -74,6 +74,48 @@ namespace TP1_SergioCeline.Test.FileAccess
             // Test that the image is correctly saved
             Image result = new Bitmap($"{_directoryPath}/test.png");
             Assert.IsNotNull( result );
+        }
+
+        [TestMethod]
+        public void SaveImage_CreatesImageJPG()
+        {
+            Image img = new Bitmap($"{_directoryPath}/init.png");
+
+            // Create
+            var pathDefiner = Substitute.For<IPathDefiner>();
+            IFileAccess fileAccess = new LocalFileAccess(pathDefiner);
+
+            // Set a return value
+            pathDefiner.DefinePath(false).Returns($"{_directoryPath}/test.jpg");
+
+
+
+            // Assert
+            Assert.AreEqual(true, fileAccess.SaveImage(img));
+            // Test that the image is correctly saved
+            Image result = new Bitmap($"{_directoryPath}/test.jpg");
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void SaveImage_CreatesImageBMP()
+        {
+            Image img = new Bitmap($"{_directoryPath}/init.png");
+
+            // Create
+            var pathDefiner = Substitute.For<IPathDefiner>();
+            IFileAccess fileAccess = new LocalFileAccess(pathDefiner);
+
+            // Set a return value
+            pathDefiner.DefinePath(false).Returns($"{_directoryPath}/test.bmp");
+
+
+
+            // Assert
+            Assert.AreEqual(true, fileAccess.SaveImage(img));
+            // Test that the image is correctly saved
+            Image result = new Bitmap($"{_directoryPath}/test.bmp");
+            Assert.IsNotNull(result);
         }
 
         [TestMethod]

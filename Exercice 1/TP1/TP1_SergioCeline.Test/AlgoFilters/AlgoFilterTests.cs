@@ -19,6 +19,18 @@ namespace TP1_SergioCeline.Test.AlgoFilters
 
         #endregion
 
+        #region TestOk
+        [TestMethod]
+        public void ToString_ReturnTheGoodToString()
+        {
+            // Arrange
+            AlgoFilter algoTest = new Rainbow();
+
+            // Act & Assert
+            Assert.AreEqual(algoTest.Text, algoTest.ToString());
+        }
+        #endregion
+
 
     }
 }
