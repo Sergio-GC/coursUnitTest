@@ -1,6 +1,4 @@
-﻿using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
-
-namespace TP1_SergioCeline.FileAccess
+﻿namespace TP1_SergioCeline.FileAccess
 {
     public class LocalPathDefiner : IPathDefiner
     {

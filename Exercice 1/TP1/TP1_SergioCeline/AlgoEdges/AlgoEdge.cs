@@ -1,6 +1,5 @@
 ﻿using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
-using TP1_SergioCeline.Business;
 
 namespace TP1_SergioCeline.AlgoEdges
 {
