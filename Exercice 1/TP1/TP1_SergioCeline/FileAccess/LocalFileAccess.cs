@@ -42,7 +42,7 @@ namespace TP1_SergioCeline.FileAccess
         {
             if(image == null)
             {
-                throw new NullReferenceException("You need to load a file before saving it");
+                throw new NullReferenceException("You need to load and process a file before saving it");
             }
 
             // Ask for save location
