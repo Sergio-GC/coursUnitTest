@@ -4,5 +4,8 @@
     <Compile Update="FormImages.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Tools\CustomToolTip.cs">
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

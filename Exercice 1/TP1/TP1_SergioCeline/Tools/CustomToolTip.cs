@@ -1,4 +1,4 @@
-﻿namespace TP1_SergioCeline.Business
+﻿namespace TP1_SergioCeline.Tools
 {
     public class CustomToolTip : ToolTip
     {
@@ -34,7 +34,7 @@
                 e.Bounds.Width - 1, e.Bounds.Height - 1));
 
             // Draw the text at the center of the tooltip
-            System.Drawing.Size toolTipTextSize = TextRenderer.MeasureText(e.ToolTipText, e.Font);
+            Size toolTipTextSize = TextRenderer.MeasureText(e.ToolTipText, e.Font);
             g.DrawString(e.ToolTipText, new Font(e.Font!, FontStyle.Bold), Brushes.Black,
                 new PointF((SIZE_X - toolTipTextSize.Width) / 2, (SIZE_Y - toolTipTextSize.Height) / 2));
 

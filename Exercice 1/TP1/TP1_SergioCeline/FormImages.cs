@@ -2,6 +2,7 @@ using TP1_SergioCeline.AlgoEdges;
 using TP1_SergioCeline.AlgoFilters;
 using TP1_SergioCeline.Business;
 using TP1_SergioCeline.FileAccess;
+using TP1_SergioCeline.Tools;
 
 namespace TP1_SergioCeline
 {
@@ -9,7 +10,7 @@ namespace TP1_SergioCeline
     {
         AlgoEdge[] algoEdge = { new NoEdgeDetection(), new Laplacian(), new Sobel(), new Prewitt() };
         AlgoFilter[] filters = { new Rainbow(), new BlackWhite(), new ColorSwap() };
-        CustomToolTip _customToolTip = new CustomToolTip();
+        CustomToolTip _customToolTip;
 
         private IFileAccess _fileAccess;
         private IManager _manager;
@@ -21,6 +22,7 @@ namespace TP1_SergioCeline
             InitLbFilter();
             _manager = new Manager(new ConvertImage());
             _fileAccess = new LocalFileAccess(new LocalPathDefiner());
+            _customToolTip = new CustomToolTip();
         }
 
         private void InitLbFilter()
@@ -43,6 +45,7 @@ namespace TP1_SergioCeline
             catch(ArgumentException ex)
             {
                 // User cancelled load of image
+                // On peut pas avoir les calcule dans le tooltip est-ce vraiement utile par rapport à utilise le messageBox?
                 _customToolTip.Show(ex.Message, this, (Width - _customToolTip.SIZE_X) / 2, (int)(Height - (1.5 * _customToolTip.SIZE_Y)), 2500);
             }
             catch (Exception ex)
@@ -59,6 +62,7 @@ namespace TP1_SergioCeline
             }
             catch(NullReferenceException ex)
             {
+                // Si c'est pour mettre la même chose que le cas normal c'est pas nécessaire
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (ArgumentException ex)
