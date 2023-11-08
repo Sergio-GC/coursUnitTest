@@ -9,6 +9,7 @@ namespace TP1_SergioCeline
     {
         AlgoEdge[] algoEdge = { new NoEdgeDetection(), new Laplacian(), new Sobel(), new Prewitt() };
         AlgoFilter[] filters = { new Rainbow(), new BlackWhite(), new ColorSwap() };
+        CustomToolTip _customToolTip = new CustomToolTip();
 
         private IFileAccess _fileAccess;
         private IManager _manager;
@@ -39,6 +40,11 @@ namespace TP1_SergioCeline
             {
                 pbInit.Image = _fileAccess.LoadImage();
             }
+            catch(ArgumentException ex)
+            {
+                // User cancelled load of image
+                _customToolTip.Show(ex.Message, this, (Width - _customToolTip.SIZE_X) / 2, (int)(Height - (1.5 * _customToolTip.SIZE_Y)), 2500);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -50,6 +56,15 @@ namespace TP1_SergioCeline
             try
             {
                 _fileAccess.SaveImage(pbResult.Image);
+            }
+            catch(NullReferenceException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (ArgumentException ex)
+            {
+                // User cancelled save of image
+                _customToolTip.Show(ex.Message, this, (Width - _customToolTip.SIZE_X) / 2, (int)(Height - (1.5 * _customToolTip.SIZE_Y)), 2500);
             }
             catch (Exception ex)
             {

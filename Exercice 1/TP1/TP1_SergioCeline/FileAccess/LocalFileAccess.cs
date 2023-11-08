@@ -19,7 +19,7 @@ namespace TP1_SergioCeline.FileAccess
             string file = _pathDefiner.DefinePath(true);
 
             // If user clicks on OK, load image, else return nothing
-            if (file != null)
+            if (!string.IsNullOrEmpty(file))
             {
                 // Load and return the image
                 StreamReader streamReader = new StreamReader(file);
@@ -28,10 +28,8 @@ namespace TP1_SergioCeline.FileAccess
 
                 return imageInit;
             }
-            else
-            {
-                return null;
-            }
+
+            throw new ArgumentException("Load operation cancelled");
         }
 
 
@@ -42,14 +40,19 @@ namespace TP1_SergioCeline.FileAccess
         /// <returns>True when the save process was successful, else false</returns>
         public bool SaveImage(Image image)
         {
+            if(image == null)
+            {
+                throw new NullReferenceException("You need to load a file before saving it");
+            }
+
             // Ask for save location
             string file = _pathDefiner.DefinePath(false);
 
             // If user clicks on OK, save image else do nothing
-            if (file != null)
+            if (!string.IsNullOrEmpty(file))
             {
                 string fileExtension = Path.GetExtension(file).ToUpper();
-                ImageFormat imgFormat = null;
+                ImageFormat imgFormat = null!;
 
                 // Define the file extension
                 switch (fileExtension)
@@ -70,10 +73,7 @@ namespace TP1_SergioCeline.FileAccess
 
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            throw new ArgumentException("Save operation cancelled");
         }
     }
 }

@@ -30,12 +30,7 @@ namespace TP1_SergioCeline.FileAccess
             {
                 return dialog.FileName;
             }
-            else
-            {
-                return null;
-            }
-            // Tu préfère pas retourné une erreur qui sera catch dans l'interface graphique? et du coup ça sera un cas à tester?
-            // et du coup pas besoin de mettre else car dans le if il y a un return
+            return null!;
         }
     }
 }
