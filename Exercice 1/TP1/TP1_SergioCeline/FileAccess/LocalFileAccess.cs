@@ -19,18 +19,17 @@ namespace TP1_SergioCeline.FileAccess
             string file = _pathDefiner.DefinePath(true);
 
             // If user clicks on OK, load image, else return nothing
-            if (!string.IsNullOrEmpty(file))
-            {
-                // Load and return the image
-                StreamReader streamReader = new StreamReader(file);
-                Bitmap imageInit = new Bitmap(streamReader.BaseStream);
-                streamReader.Close();
+            if (string.IsNullOrEmpty(file))
+              throw new ArgumentException("Load operation cancelled");
 
-                return imageInit;
-            }
+            // Load and return the image
+            StreamReader streamReader = new StreamReader(file);
+            Bitmap imageInit = new Bitmap(streamReader.BaseStream);
+            streamReader.Close();
 
-            throw new ArgumentException("Load operation cancelled");
-        }
+            return imageInit;
+        
+    }
 
 
         /// <summary>
@@ -41,39 +40,36 @@ namespace TP1_SergioCeline.FileAccess
         public bool SaveImage(Image image)
         {
             if(image == null)
-            {
                 throw new NullReferenceException("You need to load and process a file before saving it");
-            }
 
             // Ask for save location
             string file = _pathDefiner.DefinePath(false);
 
             // If user clicks on OK, save image else do nothing
-            if (!string.IsNullOrEmpty(file))
+            if (string.IsNullOrEmpty(file))
+                throw new ArgumentException("Save operation cancelled");
+
+            string fileExtension = Path.GetExtension(file).ToUpper();
+            ImageFormat imgFormat = null!;
+
+            // Define the file extension
+            switch (fileExtension)
             {
-                string fileExtension = Path.GetExtension(file).ToUpper();
-                ImageFormat imgFormat = null!;
-
-                // Define the file extension
-                switch (fileExtension)
-                {
-                    case ".PNG":
-                        imgFormat = ImageFormat.Png;
-                        break;
-                    case ".JPG":
-                        imgFormat = ImageFormat.Jpeg;
-                        break;
-                    case ".BMP":
-                        imgFormat = ImageFormat.Bmp;
-                        break;
-                }
-
-                // Save the image
-                image.Save(file, imgFormat);
-
-                return true;
+                case ".PNG":
+                    imgFormat = ImageFormat.Png;
+                    break;
+                case ".JPG":
+                    imgFormat = ImageFormat.Jpeg;
+                    break;
+                case ".BMP":
+                    imgFormat = ImageFormat.Bmp;
+                    break;
             }
-            throw new ArgumentException("Save operation cancelled");
+
+            // Save the image
+            image.Save(file, imgFormat);
+
+            return true;
         }
     }
 }
