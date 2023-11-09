@@ -60,11 +60,6 @@ namespace TP1_SergioCeline
             {
                 _fileAccess.SaveImage(pbResult.Image);
             }
-            catch(NullReferenceException ex)
-            {
-                // Si c'est pour mettre la même chose que le cas normal c'est pas nécessaire
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
             catch (ArgumentException ex)
             {
                 // User cancelled save of image
