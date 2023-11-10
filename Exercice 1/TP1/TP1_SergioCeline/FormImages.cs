@@ -1,6 +1,7 @@
 using TP1_SergioCeline.AlgoEdges;
 using TP1_SergioCeline.AlgoFilters;
 using TP1_SergioCeline.Business;
+using TP1_SergioCeline.DefineName;
 using TP1_SergioCeline.FileAccess;
 using TP1_SergioCeline.Tools;
 
@@ -13,6 +14,7 @@ namespace TP1_SergioCeline
         CustomToolTip _customToolTip;
 
         private IFileAccess _fileAccess;
+        private IFileAccess _oldfileAccess;
         private IManager _manager;
 
         public FormImages()
@@ -21,7 +23,8 @@ namespace TP1_SergioCeline
             InitCmbAlgoEdge();
             InitLbFilter();
             _manager = new Manager(new ConvertImage());
-            _fileAccess = new LocalFileAccess(new LocalPathDefiner());
+            _oldfileAccess = new LocalFileAccess(new LocalPathDefiner());
+            _fileAccess = new DbFileAccess(new WindowsNameDefiner());
             _customToolTip = new CustomToolTip();
         }
 
@@ -40,12 +43,11 @@ namespace TP1_SergioCeline
         {
             try
             {
-                pbInit.Image = _fileAccess.LoadImage();
+                pbInit.Image = _oldfileAccess.LoadImage();
             }
             catch(ArgumentException ex)
             {
                 // User cancelled load of image
-                // On peut pas avoir les calcule dans le tooltip est-ce vraiement utile par rapport à utilise le messageBox?
                 _customToolTip.Show(ex.Message, this, (Width - _customToolTip.SIZE_X) / 2, (int)(Height - (1.5 * _customToolTip.SIZE_Y)), 2500);
             }
             catch (Exception ex)

@@ -1,7 +1,10 @@
 ﻿using Microsoft.Data.SqlClient;
+using MySqlConnector;
 using System.Data;
 using System.Runtime.Intrinsics.Arm;
+using TP1_SergioCeline.DefineName;
 using TP1_SergioCeline.Tools;
+using static Azure.Core.HttpHeader;
 
 namespace TP1_SergioCeline.FileAccess
 {
@@ -23,59 +26,71 @@ namespace TP1_SergioCeline.FileAccess
         public Bitmap LoadImage()
         {
             List<string> names = new List<string> ();
-            SqlDataReader rdr = null;
-            SqlConnection conn = null;
-            SqlCommand selcmd = null;
             try
             {
-                conn = new SqlConnection(_connString);
-                selcmd = new SqlCommand
-              ("select name from [Image]", conn);
-                conn.Open();
-                rdr = selcmd.ExecuteReader();
-                while (rdr.Read())
+                using (MySqlConnection conn = new MySqlConnection(_connString))
                 {
-                    names.Add(rdr["name"].ToString());
+                    using (MySqlCommand selcmd = new MySqlCommand("SELECT name FROM Image", conn))
+                    {
+                        conn.Open();
+                        using (MySqlDataReader rdr = selcmd.ExecuteReader())
+                        {
+                            while (rdr.Read())
+                            {
+                                names.Add(rdr["name"].ToString());
+                            }
+                        }
+                    }
                 }
             }
-            finally
+            catch (Exception ex)
             {
-                if (conn != null)
-                    conn.Close();
+                // TODO show error :)
             }
+
             string name = _nameDefiner.SelectName(names);
 
             // If user clicks on OK, load image, else return nothing
             if (!string.IsNullOrEmpty(name))
             {
-                // Load and return the image
-                 rdr = null;
-                 conn = null;
-                 selcmd = null;
                 try
                 {
-                    conn = new SqlConnection(_connString);
-                    selcmd = new SqlCommand
-                  ("select image from [Image] where name=@name", conn);
-                    selcmd.Parameters.Add("name",SqlDbType.NVarChar).Value = name;
-                    conn.Open();
-                    rdr = selcmd.ExecuteReader();
-                    while (rdr.Read())
+                    using (MySqlConnection conn = new MySqlConnection(_connString))
                     {
-                        //TODO
-                        return new Bitmap((byte[])rdr["image"]);
+                        using (MySqlCommand selcmd = new MySqlCommand("SELECT image FROM Image where name=@name", conn))
+                        {
+                            selcmd.Parameters.Add("name", MySqlDbType.VarString).Value = name;
+                            conn.Open();
+                            using (MySqlDataReader rdr = selcmd.ExecuteReader())
+                            {
+                                if (rdr.Read())
+                                {
+                                    return _GetBitmapFromByteArray((byte[])rdr["image"]);
+                                }
+                            }
+                        }
                     }
-                    if (rdr != null)
-                        rdr.Close();
                 }
-                finally
+                catch (Exception ex)
                 {
-                    if (conn != null)
-                        conn.Close();
+                    throw ex;
+                    // TODO show exception :)
                 }
             }
-
             throw new ArgumentException("Load operation cancelled");
+        }
+
+        /// <summary>
+        /// Convert an array of bytes into a bitmap
+        /// </summary>
+        /// <param name="data">Image data in the form of an array of bytes</param>
+        /// <returns>Bitmap with the image</returns>
+        private Bitmap _GetBitmapFromByteArray(byte[] data)
+        {
+            using(MemoryStream ms = new MemoryStream(data))
+            {
+                return new Bitmap(ms);
+            }
         }
 
 
@@ -97,26 +112,27 @@ namespace TP1_SergioCeline.FileAccess
             // If user clicks on OK, save image else do nothing
             if (!string.IsNullOrEmpty(name))
             {
-                SqlConnection conn = null;
                 try
                 {
-                    conn = new SqlConnection(_connString);
-                    conn.Open();
-                    SqlCommand insertCommand =
-                        new SqlCommand(
-                        "Insert into [Image] (name, image) Values (@name, @image)", conn);
-                    insertCommand.Parameters.Add("image", SqlDbType.Image, 0).Value =
+                    using (MySqlConnection conn = new MySqlConnection(_connString))
+                    {
+                        using (MySqlCommand insertcommand = new MySqlCommand("Insert into [Image] (name, image) Values (@name, @image)", conn))
+                        {
+                            conn.Open();
+                            insertcommand.Parameters.Add("image", MySqlDbType.MediumBlob, 0).Value =
                         (new ConvertImage()).ConvertImageToByteArray(image, System.Drawing.Imaging.ImageFormat.Jpeg);
-                    insertCommand.Parameters.Add("name", SqlDbType.NVarChar).Value = name;
-                    int queryResult = insertCommand.ExecuteNonQuery();
-                    if (queryResult == 1)
-                        return true;
+                            insertcommand.Parameters.Add("name", MySqlDbType.VarString).Value = name;
+                            int result = insertcommand.ExecuteNonQuery();
 
+                            if (result == 1)
+                                return true;
+                        }
+                    }
                 }
-                finally
+                catch (Exception ex)
                 {
-                    if (conn != null)
-                        conn.Close();
+                    throw ex;
+                    // TODO show exception :)
                 }
             }
             throw new ArgumentException("Save operation cancelled");
