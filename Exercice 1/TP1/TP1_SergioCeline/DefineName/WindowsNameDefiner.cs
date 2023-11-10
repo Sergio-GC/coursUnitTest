@@ -5,7 +5,6 @@
 
         public string DefineName()
         {
-            string imageName = null;
 
             Form popup = CreateMyPopup();
             popup.Text = "Define the name of the new image";
@@ -26,8 +25,6 @@
 
         public string SelectName(List<string> files)
         {
-            string selectedImage = null;
-
             Form popup = CreateMyPopup();
             popup.Text = "Select an image";
 
@@ -43,7 +40,6 @@
             Button okButton = CreateMyButton();
             okButton.Click += (sender, e) =>
             {
-                selectedImage = comboBox.SelectedItem as string;
                 popup.Close();
             };
 

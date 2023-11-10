@@ -1,4 +1,5 @@
 ﻿using MySqlConnector;
+using TP1_SergioCeline.Business;
 using TP1_SergioCeline.DefineName;
 using TP1_SergioCeline.Tools;
 
@@ -7,12 +8,34 @@ namespace TP1_SergioCeline.FileAccess
     public class DbFileAccess : IFileAccess
     {
         private INameDefiner _nameDefiner;
+        private IConvertImage _convertImage;
         private string _connString;
-        public DbFileAccess(INameDefiner nameDefiner)
+        public DbFileAccess(INameDefiner nameDefiner, IConvertImage convertImage)
         {
             _nameDefiner = nameDefiner;
+            _convertImage = convertImage;
             _connString = System.Configuration.ConfigurationManager.ConnectionStrings
                   ["ConnectionString"].ConnectionString;
+        }
+        public List<string> GetListName()
+        {
+            List<string> names = new List<string>();
+
+            using (MySqlConnection conn = new MySqlConnection(_connString))
+            {
+                using (MySqlCommand selcmd = new MySqlCommand("SELECT name FROM Image", conn))
+                {
+                    conn.Open();
+                    using (MySqlDataReader rdr = selcmd.ExecuteReader())
+                    {
+                        while (rdr.Read())
+                        {
+                            names.Add(rdr["name"].ToString());
+                        }
+                    }
+                }
+            }
+            return names;
         }
 
         /// <summary>
@@ -21,74 +44,33 @@ namespace TP1_SergioCeline.FileAccess
         /// <returns>Bitmap with the chosen image</returns>
         public Bitmap LoadImage()
         {
-            List<string> names = new List<string> ();
-            try
-            {
-                using (MySqlConnection conn = new MySqlConnection(_connString))
-                {
-                    using (MySqlCommand selcmd = new MySqlCommand("SELECT name FROM Image", conn))
-                    {
-                        conn.Open();
-                        using (MySqlDataReader rdr = selcmd.ExecuteReader())
-                        {
-                            while (rdr.Read())
-                            {
-                                names.Add(rdr["name"].ToString());
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                // TODO show error :)
-            }
+            List<string> names = GetListName();
 
             string name = _nameDefiner.SelectName(names);
 
             // If user clicks on OK, load image, else return nothing
-            if (!string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(name))
             {
-                try
+                throw new ArgumentException("Load operation cancelled");
+            }
+
+            using (MySqlConnection conn = new MySqlConnection(_connString))
+            {
+                using (MySqlCommand selcmd = new MySqlCommand("SELECT image FROM Image where name=@name", conn))
                 {
-                    using (MySqlConnection conn = new MySqlConnection(_connString))
+                    selcmd.Parameters.Add("name", MySqlDbType.VarString).Value = name;
+                    conn.Open();
+                    using (MySqlDataReader rdr = selcmd.ExecuteReader())
                     {
-                        using (MySqlCommand selcmd = new MySqlCommand("SELECT image FROM Image where name=@name", conn))
+                        if (rdr.Read())
                         {
-                            selcmd.Parameters.Add("name", MySqlDbType.VarString).Value = name;
-                            conn.Open();
-                            using (MySqlDataReader rdr = selcmd.ExecuteReader())
-                            {
-                                if (rdr.Read())
-                                {
-                                    return _GetBitmapFromByteArray((byte[])rdr["image"]);
-                                }
-                            }
+                            return _convertImage.GetBitmapFromByteArray((byte[])rdr["image"]);
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    throw ex;
-                    // TODO show exception :)
-                }
             }
-            throw new ArgumentException("Load operation cancelled");
+            throw new ArgumentException("Load operation failed"); ;
         }
-
-        /// <summary>
-        /// Convert an array of bytes into a bitmap
-        /// </summary>
-        /// <param name="data">Image data in the form of an array of bytes</param>
-        /// <returns>Bitmap with the image</returns>
-        private Bitmap _GetBitmapFromByteArray(byte[] data)
-        {
-            using(MemoryStream ms = new MemoryStream(data))
-            {
-                return new Bitmap(ms);
-            }
-        }
-
 
         /// <summary>
         /// Save an image to the user's chosen path
@@ -106,32 +88,24 @@ namespace TP1_SergioCeline.FileAccess
             string name = _nameDefiner.DefineName();
 
             // If user clicks on OK, save image else do nothing
-            if (!string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(name))
             {
-                try
-                {
-                    using (MySqlConnection conn = new MySqlConnection(_connString))
-                    {
-                        using (MySqlCommand insertcommand = new MySqlCommand("Insert into Image (name, image) Values (@name, @image)", conn))
-                        {
-                            conn.Open();
-                            insertcommand.Parameters.Add("image", MySqlDbType.Blob, 0).Value =
-                        (new ConvertImage()).ConvertImageToByteArray(image, System.Drawing.Imaging.ImageFormat.Jpeg);
-                            insertcommand.Parameters.Add("name", MySqlDbType.VarChar).Value = name;
-                            int result = insertcommand.ExecuteNonQuery();
+                throw new ArgumentException("Save operation cancelled");
+            }
 
-                            if (result == 1)
-                                return true;
-                        }
-                    }
-                }
-                catch (Exception ex)
+            using (MySqlConnection conn = new MySqlConnection(_connString))
+            {
+                using (MySqlCommand insertcommand = new MySqlCommand("Insert into Image (name, image) Values (@name, @image)", conn))
                 {
-                    throw ex;
-                    // TODO show exception :)
+                    conn.Open();
+                    insertcommand.Parameters.Add("image", MySqlDbType.Blob, 0).Value = _convertImage.ConvertImageToByteArray(image, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    insertcommand.Parameters.Add("name", MySqlDbType.VarChar).Value = name;
+                    int result = insertcommand.ExecuteNonQuery();
+
+                    return result == 1;
                 }
             }
-            throw new ArgumentException("Save operation cancelled");
+            throw new ArgumentException("Save operation failed");
         }
     }
 }

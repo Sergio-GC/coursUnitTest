@@ -24,5 +24,18 @@ namespace TP1_SergioCeline.Tools
             catch (Exception) { throw; }
             return Ret;
         }
+
+        /// <summary>
+        /// Convert an array of bytes into a bitmap
+        /// </summary>
+        /// <param name="data">Image data in the form of an array of bytes</param>
+        /// <returns>Bitmap with the image</returns>
+        public Bitmap GetBitmapFromByteArray(byte[] data)
+        {
+            using (MemoryStream ms = new MemoryStream(data))
+            {
+                return new Bitmap(ms);
+            }
+        }
     }
 }
