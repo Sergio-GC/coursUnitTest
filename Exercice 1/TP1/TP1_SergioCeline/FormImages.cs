@@ -14,7 +14,6 @@ namespace TP1_SergioCeline
         CustomToolTip _customToolTip;
 
         private IFileAccess _fileAccess;
-        private IFileAccess _oldfileAccess;
         private IManager _manager;
 
         public FormImages()
@@ -23,8 +22,7 @@ namespace TP1_SergioCeline
             InitCmbAlgoEdge();
             InitLbFilter();
             _manager = new Manager(new ConvertImage());
-            _oldfileAccess = new LocalFileAccess(new LocalPathDefiner());
-            _fileAccess = new DbFileAccess(new WindowsNameDefiner());
+            _fileAccess = new LocalFileAccess(new LocalPathDefiner());
             _customToolTip = new CustomToolTip();
         }
 
