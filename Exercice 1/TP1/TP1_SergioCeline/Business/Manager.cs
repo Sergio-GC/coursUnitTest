@@ -1,5 +1,6 @@
 ﻿using TP1_SergioCeline.AlgoEdges;
 using TP1_SergioCeline.AlgoFilters;
+using TP1_SergioCeline.Tools;
 
 namespace TP1_SergioCeline.Business
 {

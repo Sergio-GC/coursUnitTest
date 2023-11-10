@@ -1,6 +1,6 @@
 ﻿using System.Drawing.Imaging;
 
-namespace TP1_SergioCeline.Business
+namespace TP1_SergioCeline.Tools
 {
     public interface IConvertImage
     {

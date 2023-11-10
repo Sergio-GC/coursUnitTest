@@ -1,5 +1,4 @@
 ﻿using System.Drawing.Imaging;
-using TP1_SergioCeline.Business;
 
 namespace TP1_SergioCeline.Tools
 {

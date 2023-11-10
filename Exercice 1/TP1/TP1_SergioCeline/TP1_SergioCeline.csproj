@@ -13,4 +13,10 @@
     <PackageReference Include="MySqlConnector" Version="2.2.7" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
