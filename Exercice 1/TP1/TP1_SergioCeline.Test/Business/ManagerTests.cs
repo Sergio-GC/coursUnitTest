@@ -35,12 +35,12 @@ namespace TP1_SergioCeline.Test.Business
 
             // Subsitute algo
             AlgoFilter filter = Substitute.For<AlgoFilter>("Test filter");
-            filter.ExecuteAlgo(Arg.Any<Bitmap>()).Returns(bpmAttempt);
+            filter.ExecuteAlgo(bpm).ReturnsForAnyArgs(bpmAttempt);
             List<AlgoFilter> algoFilters = new ();
             algoFilters.Add(filter);
 
             AlgoEdge edge = Substitute.For<AlgoEdge>("Test EdgeDetection");
-            edge.ExecuteAlgo(Arg.Any<Bitmap>()).Returns(bpmAttempt);
+            edge.ExecuteAlgo(bpm).ReturnsForAnyArgs(bpmAttempt);
 
 
             IManager manager = new Manager();

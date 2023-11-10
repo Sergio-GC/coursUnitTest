@@ -28,7 +28,7 @@ namespace TP1_SergioCeline.Test.FileAccess
 
             // Arrange
             Bitmap expected = new Bitmap($"{_directoryPath}/init.png");
-            expected = new Bitmap("C:\\Users\\gomez\\OneDrive\\Imágenes\\pfp2.jpg");
+           // expected = new Bitmap("C:\\Users\\gomez\\OneDrive\\Imágenes\\pfp2.jpg");
 
             // Act
             Bitmap obtained = fileAccess.LoadImage();
