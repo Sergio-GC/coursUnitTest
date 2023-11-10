@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using TP1_SergioCeline.AlgoFilters;
+﻿using TP1_SergioCeline.AlgoFilters;
 
 namespace TP1_SergioCeline.Test.AlgoFilters
 {

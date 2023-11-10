@@ -1,5 +1,4 @@
 ﻿using MySqlConnector;
-using TP1_SergioCeline.Business;
 using TP1_SergioCeline.DefineName;
 using TP1_SergioCeline.Tools;
 
@@ -14,6 +13,12 @@ namespace TP1_SergioCeline.FileAccess
             _nameDefiner = nameDefiner;
             _connString = System.Configuration.ConfigurationManager.ConnectionStrings
                   ["ConnectionString"].ConnectionString;
+        }
+        public DbFileAccess(INameDefiner nameDefiner, IConvertImage convertImage, string connString)
+        {
+            _nameDefiner = nameDefiner;
+            _convertImage = convertImage;
+            _connString = connString;
         }
         public List<string> GetListName()
         {

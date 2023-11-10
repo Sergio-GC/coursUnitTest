@@ -1,6 +1,7 @@
 using TP1_SergioCeline.AlgoEdges;
 using TP1_SergioCeline.AlgoFilters;
 using TP1_SergioCeline.Business;
+using TP1_SergioCeline.DefineName;
 using TP1_SergioCeline.FileAccess;
 using TP1_SergioCeline.Tools;
 
@@ -12,7 +13,7 @@ namespace TP1_SergioCeline
         AlgoFilter[] filters = { new Rainbow(), new BlackWhite(), new ColorSwap() };
         CustomToolTip _customToolTip;
 
-        private IFileAccess _fileAccess;
+        private IFileAccess _fileAccess, _dbFile;
         private IManager _manager;
 
         public FormImages()
@@ -22,6 +23,7 @@ namespace TP1_SergioCeline
             InitLbFilter();
             _manager = new Manager();
             _fileAccess = new LocalFileAccess(new LocalPathDefiner());
+            _dbFile = new DbFileAccess(new WindowsNameDefiner(), new ConvertImage());
             _customToolTip = new CustomToolTip();
         }
 
@@ -57,7 +59,7 @@ namespace TP1_SergioCeline
         {
             try
             {
-                _fileAccess.SaveImage(pbResult.Image);
+                _dbFile.SaveImage(pbResult.Image);
             }
             catch (ArgumentException ex)
             {
