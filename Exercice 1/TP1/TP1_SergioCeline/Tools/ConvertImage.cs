@@ -1,15 +1,14 @@
 ﻿using System.Drawing.Imaging;
-using TP1_SergioCeline.Business;
 
 namespace TP1_SergioCeline.Tools
 {
-    public class ConvertImage : IConvertImage
+    public static class ConvertImage 
     {
-        public Bitmap ConvertToBitmap(Image image)
+        public static Bitmap ConvertToBitmap(Image image)
         {
             return new Bitmap(image);
         }
-        public byte[] ConvertImageToByteArray(Image imageToConvert,
+        public static byte[] ConvertImageToByteArray(Image imageToConvert,
                                       ImageFormat formatOfImage)
         {
             byte[] Ret;
@@ -30,7 +29,7 @@ namespace TP1_SergioCeline.Tools
         /// </summary>
         /// <param name="data">Image data in the form of an array of bytes</param>
         /// <returns>Bitmap with the image</returns>
-        public Bitmap GetBitmapFromByteArray(byte[] data)
+        public static Bitmap GetBitmapFromByteArray(byte[] data)
         {
             using (MemoryStream ms = new MemoryStream(data))
             {

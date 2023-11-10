@@ -8,12 +8,10 @@ namespace TP1_SergioCeline.FileAccess
     public class DbFileAccess : IFileAccess
     {
         private INameDefiner _nameDefiner;
-        private IConvertImage _convertImage;
         private string _connString;
-        public DbFileAccess(INameDefiner nameDefiner, IConvertImage convertImage)
+        public DbFileAccess(INameDefiner nameDefiner)
         {
             _nameDefiner = nameDefiner;
-            _convertImage = convertImage;
             _connString = System.Configuration.ConfigurationManager.ConnectionStrings
                   ["ConnectionString"].ConnectionString;
         }
@@ -64,7 +62,7 @@ namespace TP1_SergioCeline.FileAccess
                     {
                         if (rdr.Read())
                         {
-                            return _convertImage.GetBitmapFromByteArray((byte[])rdr["image"]);
+                            return ConvertImage.GetBitmapFromByteArray((byte[])rdr["image"]);
                         }
                     }
                 }
@@ -98,7 +96,7 @@ namespace TP1_SergioCeline.FileAccess
                 using (MySqlCommand insertcommand = new MySqlCommand("Insert into Image (name, image) Values (@name, @image)", conn))
                 {
                     conn.Open();
-                    insertcommand.Parameters.Add("image", MySqlDbType.Blob, 0).Value = _convertImage.ConvertImageToByteArray(image, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    insertcommand.Parameters.Add("image", MySqlDbType.Blob, 0).Value = ConvertImage.ConvertImageToByteArray(image, System.Drawing.Imaging.ImageFormat.Jpeg);
                     insertcommand.Parameters.Add("name", MySqlDbType.VarChar).Value = name;
                     int result = insertcommand.ExecuteNonQuery();
 

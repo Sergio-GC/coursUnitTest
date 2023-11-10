@@ -20,7 +20,7 @@ namespace TP1_SergioCeline
             InitializeComponent();
             InitCmbAlgoEdge();
             InitLbFilter();
-            _manager = new Manager(new ConvertImage());
+            _manager = new Manager();
             _fileAccess = new LocalFileAccess(new LocalPathDefiner());
             _customToolTip = new CustomToolTip();
         }

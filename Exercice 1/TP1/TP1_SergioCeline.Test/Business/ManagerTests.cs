@@ -14,10 +14,8 @@ namespace TP1_SergioCeline.Test.Business
         [TestMethod]
         public void Process_ThrowArgumentNullException()
         {
-            IConvertImage convert = Substitute.For<IConvertImage>();
-
             // Arrange
-            IManager manager = new Manager(convert);
+            IManager manager = new Manager();
 
             // Act & Assert
             Assert.ThrowsException<ArgumentNullException>(() => manager.Process(null, null, null), "Please load a picture before");
@@ -36,17 +34,15 @@ namespace TP1_SergioCeline.Test.Business
 
             // Subsitute algo
             AlgoFilter filter = Substitute.For<AlgoFilter>("Test filter");
-            filter.ExecuteAlgo(bpm).Returns(bpmAttempt);
+            filter.ExecuteAlgo(Arg.Any<Bitmap>()).Returns(bpmAttempt);
             List<AlgoFilter> algoFilters = new ();
             algoFilters.Add(filter);
 
             AlgoEdge edge = Substitute.For<AlgoEdge>("Test EdgeDetection");
-            edge.ExecuteAlgo(bpmAttempt).Returns(bpmAttempt);
+            edge.ExecuteAlgo(Arg.Any<Bitmap>()).Returns(bpmAttempt);
 
-            IConvertImage convert = Substitute.For<IConvertImage>();
-            convert.ConvertToBitmap(image).Returns(bpm);
 
-            IManager manager = new Manager(convert);
+            IManager manager = new Manager();
 
             // Act
             Image imgResult = manager.Process(image, algoFilters, edge);
