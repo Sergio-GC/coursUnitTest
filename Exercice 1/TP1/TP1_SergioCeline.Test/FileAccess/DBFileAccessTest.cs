@@ -1,5 +1,6 @@
 ﻿using NSubstitute;
 using System.Drawing;
+using System.Drawing.Imaging;
 using TP1_SergioCeline.DefineName;
 using TP1_SergioCeline.FileAccess;
 using TP1_SergioCeline.Test.Helper;
@@ -35,7 +36,7 @@ namespace TP1_SergioCeline.Test.FileAccess
 
             // Assert
             Assert.IsNotNull(obtained);
-            //EqualsHelper.CheckBitmapEquals(expected, obtained);
+            // EqualsHelper.CheckBitmapEquals(test2, obtained);
         }
 
         [TestMethod]
