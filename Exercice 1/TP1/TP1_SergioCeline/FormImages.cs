@@ -1,7 +1,6 @@
 using TP1_SergioCeline.AlgoEdges;
 using TP1_SergioCeline.AlgoFilters;
 using TP1_SergioCeline.Business;
-using TP1_SergioCeline.DefineName;
 using TP1_SergioCeline.FileAccess;
 using TP1_SergioCeline.Tools;
 
