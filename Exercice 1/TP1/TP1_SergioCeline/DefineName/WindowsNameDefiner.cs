@@ -43,9 +43,8 @@ namespace TP1_SergioCeline.DefineName
             popup.Controls.Add(okButton);
 
             //Display the popup
-            popup.Show();
 
-            return popup.ShowDialog() == DialogResult.OK ? textBox.Text : null;
+            return popup.ShowDialog() == DialogResult.OK ? textBox.Text : "";
         }
 
         public string SelectName(List<string> files)
