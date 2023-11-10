@@ -20,7 +20,7 @@ namespace TP1_SergioCeline.Test.FileAccess
         {
             // Create
             var nameDefiner = Substitute.For<INameDefiner>();
-            DbFileAccess fileAccess = new DbFileAccess(nameDefiner, new ConvertImage(), _connectionString);
+            DbFileAccess fileAccess = new DbFileAccess(nameDefiner, _connectionString);
 
             // Set a return value
             nameDefiner.SelectName(Arg.Any<List<string>>()).Returns("sampleImage");
@@ -44,8 +44,8 @@ namespace TP1_SergioCeline.Test.FileAccess
             // Create
             var emptyNameDefiner = Substitute.For<INameDefiner>();
             var nullNameDefiner = Substitute.For<INameDefiner>();
-            DbFileAccess emptyFileAccess = new DbFileAccess(emptyNameDefiner, new ConvertImage(), _connectionString);
-            DbFileAccess nullFileAccess = new DbFileAccess(nullNameDefiner, new ConvertImage(), _connectionString);
+            DbFileAccess emptyFileAccess = new DbFileAccess(emptyNameDefiner, _connectionString);
+            DbFileAccess nullFileAccess = new DbFileAccess(nullNameDefiner, _connectionString);
 
             // Set a return value
             emptyNameDefiner.SelectName(Arg.Any<List<string>>()).Returns("");
@@ -66,7 +66,7 @@ namespace TP1_SergioCeline.Test.FileAccess
 
             // Create
             var nameDefiner = Substitute.For<INameDefiner>();
-            DbFileAccess fileAccess = new DbFileAccess(nameDefiner, new ConvertImage(), _connectionString);
+            DbFileAccess fileAccess = new DbFileAccess(nameDefiner, _connectionString);
 
             // Set a return value
             nameDefiner.DefineName().Returns($"test");
@@ -90,8 +90,8 @@ namespace TP1_SergioCeline.Test.FileAccess
             // Create
             var emptyNameDefiner = Substitute.For<INameDefiner>();
             var nullNameDefiner = Substitute.For<INameDefiner>();
-            IFileAccess emptyFileAccess = new DbFileAccess(emptyNameDefiner, new ConvertImage(), _connectionString);
-            IFileAccess nullFileAccess = new DbFileAccess(nullNameDefiner, new ConvertImage(), _connectionString);
+            IFileAccess emptyFileAccess = new DbFileAccess(emptyNameDefiner, _connectionString);
+            IFileAccess nullFileAccess = new DbFileAccess(nullNameDefiner, _connectionString);
 
             // Set a return value
             emptyNameDefiner.DefineName().Returns("");
@@ -111,7 +111,7 @@ namespace TP1_SergioCeline.Test.FileAccess
 
             // Create
             var nameDefiner = Substitute.For<INameDefiner>();
-            IFileAccess fileAccess = new DbFileAccess(nameDefiner, new ConvertImage(), _connectionString);
+            IFileAccess fileAccess = new DbFileAccess(nameDefiner, _connectionString);
 
             // Set a return value
             nameDefiner.DefineName().Returns($"test.png");

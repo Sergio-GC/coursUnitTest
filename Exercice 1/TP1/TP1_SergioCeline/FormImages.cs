@@ -23,7 +23,7 @@ namespace TP1_SergioCeline
             InitLbFilter();
             _manager = new Manager();
             _fileAccess = new LocalFileAccess(new LocalPathDefiner());
-            _dbFile = new DbFileAccess(new WindowsNameDefiner(), new ConvertImage());
+            _dbFile = new DbFileAccess(new WindowsNameDefiner());
             _customToolTip = new CustomToolTip();
         }
 
