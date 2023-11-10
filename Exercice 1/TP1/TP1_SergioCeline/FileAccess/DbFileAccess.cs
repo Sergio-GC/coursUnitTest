@@ -1,10 +1,6 @@
-﻿using Microsoft.Data.SqlClient;
-using MySqlConnector;
-using System.Data;
-using System.Runtime.Intrinsics.Arm;
+﻿using MySqlConnector;
 using TP1_SergioCeline.DefineName;
 using TP1_SergioCeline.Tools;
-using static Azure.Core.HttpHeader;
 
 namespace TP1_SergioCeline.FileAccess
 {
@@ -116,12 +112,12 @@ namespace TP1_SergioCeline.FileAccess
                 {
                     using (MySqlConnection conn = new MySqlConnection(_connString))
                     {
-                        using (MySqlCommand insertcommand = new MySqlCommand("Insert into [Image] (name, image) Values (@name, @image)", conn))
+                        using (MySqlCommand insertcommand = new MySqlCommand("Insert into Image (name, image) Values (@name, @image)", conn))
                         {
                             conn.Open();
-                            insertcommand.Parameters.Add("image", MySqlDbType.MediumBlob, 0).Value =
+                            insertcommand.Parameters.Add("image", MySqlDbType.Blob, 0).Value =
                         (new ConvertImage()).ConvertImageToByteArray(image, System.Drawing.Imaging.ImageFormat.Jpeg);
-                            insertcommand.Parameters.Add("name", MySqlDbType.VarString).Value = name;
+                            insertcommand.Parameters.Add("name", MySqlDbType.VarChar).Value = name;
                             int result = insertcommand.ExecuteNonQuery();
 
                             if (result == 1)

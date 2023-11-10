@@ -1,41 +1,19 @@
-﻿using Microsoft.Identity.Client;
-
-namespace TP1_SergioCeline.DefineName
+﻿namespace TP1_SergioCeline.DefineName
 {
     public class WindowsNameDefiner : INameDefiner
     {
-        // Popup, common for both methods
-        Form popup = new Form
-        {
-            Size = new Size(500, 300),
-            StartPosition = FormStartPosition.CenterParent,
-        };
 
-        // Ok button, common for both methods
-        Button okButton = new Button
-        {
-            Text = "OK",
-            DialogResult = DialogResult.OK,
-            Dock = DockStyle.Bottom
-        };
-
-    public string DefineName()
+        public string DefineName()
         {
             string imageName = null;
+
+            Form popup = CreateMyPopup();
             popup.Text = "Define the name of the new image";
 
             // Create the field
             TextBox textBox = new TextBox();
 
-            // Event handler, assign the filename when clicking on ok and close the popup
-            /*
-            okButton.Click += (sender, e) =>
-            {
-                imageName = textBox.Text;
-                popup.Close();
-            };
-            */
-
+            Button okButton = CreateMyButton();
             okButton.Click += (sender, e) => { popup.Close(); };
 
             // Add the controls to the popup
@@ -43,13 +21,14 @@ namespace TP1_SergioCeline.DefineName
             popup.Controls.Add(okButton);
 
             //Display the popup
-
             return popup.ShowDialog() == DialogResult.OK ? textBox.Text : "";
         }
 
         public string SelectName(List<string> files)
         {
             string selectedImage = null;
+
+            Form popup = CreateMyPopup();
             popup.Text = "Select an image";
 
             // Create the dropdown list
@@ -61,6 +40,7 @@ namespace TP1_SergioCeline.DefineName
             };
 
             // Event handler, assign the filename when clicking on ok and close the popup
+            Button okButton = CreateMyButton();
             okButton.Click += (sender, e) =>
             {
                 selectedImage = comboBox.SelectedItem as string;
@@ -72,9 +52,30 @@ namespace TP1_SergioCeline.DefineName
             popup.Controls.Add(okButton);
 
             //Display the popup
-            popup.Show();
+            return popup.ShowDialog() == DialogResult.OK ? comboBox.SelectedItem as string : "";
+        }
 
-            return selectedImage;
+        private Form CreateMyPopup()
+        {
+
+            // Popup, common for both methods
+            return new Form
+            {
+                Size = new Size(500, 300),
+                StartPosition = FormStartPosition.CenterParent,
+            };
+        }
+
+        private Button CreateMyButton()
+        {
+
+            // Popup, common for both methods
+            return new Button
+            {
+                Text = "OK",
+                DialogResult = DialogResult.OK,
+                Dock = DockStyle.Bottom
+            };
         }
     }
 }

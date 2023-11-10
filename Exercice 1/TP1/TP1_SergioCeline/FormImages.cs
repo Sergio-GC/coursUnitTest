@@ -43,7 +43,7 @@ namespace TP1_SergioCeline
         {
             try
             {
-                pbInit.Image = _oldfileAccess.LoadImage();
+                pbInit.Image = _fileAccess.LoadImage();
             }
             catch(ArgumentException ex)
             {
